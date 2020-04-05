@@ -1,0 +1,15 @@
+
+.splash-container{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  img {
+    max-width: 300px;
+    width: 100%;
+  }
+  p{
+    font-size: 20px;
+  }
+}

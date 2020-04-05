@@ -1,0 +1,19 @@
+
+section.section-listing {
+  .jumbotron {
+    .container {
+      p{
+        font-size: 20px;
+      }
+    }
+  }
+
+  .listing-container{
+    width: 90%;
+    margin: auto;
+    padding: 5px;
+    @include box-shadow(0px, 0px, 10px, 1px, rgba(0,0,0,0.75));
+    margin-bottom: 100px;
+  }
+
+}

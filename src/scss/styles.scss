@@ -1,0 +1,28 @@
+@import 'bootstrap_theme/variables';
+@import './node_modules/bootstrap/scss/bootstrap';
+@import 'bootstrap_theme/bootswatch';
+//mixins
+@import 'mixins/box-shadow.scss';
+//components && pages
+@import 'listing.scss';
+@import './components/card.scss';
+@import './components/alert.scss';
+@import './components/loader.scss';
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.special-text{
+  font-weight: bold;
+  color: $danger;
+}
+
