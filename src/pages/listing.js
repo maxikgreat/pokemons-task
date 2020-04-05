@@ -1,5 +1,5 @@
 
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {PokemonsContext} from "../context/pokemons/pokemonsContext";
 import {Loader} from "../components/UI/Loader";
 import {CardCustom} from "../components/CardCustom";
@@ -21,6 +21,7 @@ export const Listing = () => {
                 <CardCustom
                     key = {index}
                     name = {pok.name}
+                    sprites = {pok.sprites}
                 />
             )
         })
@@ -29,7 +30,6 @@ export const Listing = () => {
     return(
 
         <section className='section-listing'>
-            {console.log(pokemons.alert)}
             <AlertCustom
                 alert = {pokemons.alert}
             />
