@@ -1,19 +1,26 @@
 
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import {PokemonsContext} from "../context/pokemons/pokemonsContext";
 import {Loader} from "../components/UI/Loader";
 import {CardCustom} from "../components/CardCustom";
 import {Jumbotron, Container} from "react-bootstrap";
 import {AlertCustom} from "../components/AlertCustom";
-import {Finder} from "../components/UI/Finder";
+import {Finder} from "../components/Finder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {ListLoader} from "../components/ListLoader";
 
 
 export const Listing = () => {
 
-    const {fetchList, pokemons} = useContext(PokemonsContext);
+    const {showAlert, fetchList, pokemons} = useContext(PokemonsContext);
 
     const [finder, setFinder] = useState('');
+
+    useEffect(() => {
+        if(pokemons.ready){
+            fetchList(20); // default count
+        }
+    }, [pokemons.ready]);
 
 
     const renderPoks = () => {
@@ -67,6 +74,11 @@ export const Listing = () => {
                 <Finder
                     finder = {finder}
                     setFinder = {setFinder}
+                />
+                <ListLoader
+                    maxCount = {pokemons.maxCount}
+                    showAlert ={showAlert}
+                    fetchList = {fetchList}
                 />
             </div>
             { pokemons.loading

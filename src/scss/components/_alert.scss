@@ -1,6 +1,17 @@
 
+@include keyframes(alert-fade-in){
+  0%{
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
 
 .alert{
+  @include animation('alert-fade-in .3s 1 cubic-bezier(.65,.82,.34,.94)');
   position: fixed;
   top: 0;
   left: 0;

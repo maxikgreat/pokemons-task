@@ -1,7 +1,15 @@
 
 import React, {useReducer} from 'react'
 import axios from 'axios'
-import {FETCH_MAIN_LIST, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT} from "../types";
+import {
+    FETCH_MAIN_LIST,
+    GET_MAX_COUNT,
+    HIDE_ALERT,
+    HIDE_LOADER,
+    READY_TO_LOAD,
+    SHOW_ALERT,
+    SHOW_LOADER
+} from "../types";
 import {pokemonsReducer} from "./pokemonsReducer";
 import {PokemonsContext} from "./pokemonsContext";
 
@@ -11,6 +19,8 @@ const initialState = {
         variant: '',
         message: ''
     },
+    ready: false,
+    maxCount: null,
     loading: true,
     listing: []
 };
@@ -21,10 +31,18 @@ export const PokemonState = ({children}) => {
 
     const fetchList = async (limit = 20) => {
 
+        dispatch({
+            type: SHOW_LOADER
+        });
+
         let baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
         await axios.get(baseUrl)
             .then((response) => {
+                dispatch({
+                    type: GET_MAX_COUNT,
+                    payload: response.data.count
+                });
                 const pokUrls = response.data.results;
                 return pokUrls.map(pok => {
                     return axios.get(pok.url)
@@ -52,15 +70,19 @@ export const PokemonState = ({children}) => {
                             type: FETCH_MAIN_LIST,
                             payload: listing
                         });
+                        dispatch({
+                            type: HIDE_LOADER
+                        });
                         showAlert('success', "Pokemon's list loaded. Have a fun :)");
                     })
             })
             .catch(e => {
                 showAlert('danger', "Error during connecting with API");
+                dispatch({
+                    type: HIDE_LOADER
+                })
             });
-        dispatch({
-            type: HIDE_LOADER
-        })
+
     };
 
     const showAlert = (variant, message) => {
@@ -79,8 +101,14 @@ export const PokemonState = ({children}) => {
         }, 3000);
     };
 
+    const ready = () => {
+        dispatch({
+            type: READY_TO_LOAD
+        })
+    }
+
     return (
-        <PokemonsContext.Provider value={{fetchList, pokemons: state}}>
+        <PokemonsContext.Provider value={{showAlert, ready, fetchList, pokemons: state}}>
             {children}
         </PokemonsContext.Provider>
     )

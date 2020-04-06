@@ -4,8 +4,9 @@ import React, {useRef, useState} from 'react'
 import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
 import {Gallery} from "./Gallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
-export const CardCustom = ({name, abilities, base_exp, sprites, types}) => {
+export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
 
     const [galleryVisible, setGalleryVisible] = useState(false);
 
@@ -71,7 +72,9 @@ export const CardCustom = ({name, abilities, base_exp, sprites, types}) => {
                             max={300}
                             className={'mb-2'}
                         />
-                        <Button variant="success">Pick</Button>
+                        <Link to={`/pokemon/${id}`}>
+                            <Button variant="success">Pick</Button>
+                        </Link>
                     </Card.Body>
                 </Card>
             </div>
