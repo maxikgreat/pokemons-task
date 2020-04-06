@@ -1,15 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import {filter, getNames} from "../../helpFunctions/filter";
+import React from 'react'
 
-
-export const Finder = ({poks, parentContainer}) => {
-
-    const [pokName, setPokName] = useState('');
-
-    useEffect(() => {
-        filter(getNames(poks), pokName, parentContainer);
-    },[pokName]);
-
+export const Finder = ({finder, setFinder}) => {
 
   return(
       <div className="input-group mb-3">
@@ -22,8 +13,8 @@ export const Finder = ({poks, parentContainer}) => {
               aria-label="Default"
               aria-describedby="finder"
               placeholder="Start typing..."
-              value={pokName}
-              onChange = {e => setPokName(e.target.value)}
+              value={finder}
+              onChange = {e => setFinder(e.target.value)}
           />
       </div>
   )

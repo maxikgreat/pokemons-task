@@ -5,10 +5,10 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import {Listing} from "./pages/listing";
 import {Pokemon} from "./pages/pokemon";
 //icons
-import {faTimesCircle, faMeteor} from "@fortawesome/free-solid-svg-icons";
+import {faTimesCircle, faMeteor, faSadCry} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
 
-library.add(faTimesCircle, faMeteor);
+library.add(faTimesCircle, faMeteor, faSadCry);
 
 function App() {
     return(

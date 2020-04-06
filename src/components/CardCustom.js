@@ -13,7 +13,6 @@ export const CardCustom = ({name, abilities, base_exp, sprites, types}) => {
     const openGallery = () => {
         document.body.style.overflowY = 'hidden';
         document.body.style.position = 'relative';
-        //document.querySelector('html').style.overflow = 'hidden';
         setGalleryVisible(true);
     };
 
