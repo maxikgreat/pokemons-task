@@ -1,5 +1,19 @@
 
 
+@include media-breakpoint-down(sm){
+
+  .card-container {
+    .card-title{
+      font-size: 20px;
+    }
+    .badge {
+      font-size: 17px;
+    }
+    .progress {
+      height: 30px;
+    }
+  }
+}
 // mobile screens
 @include media-breakpoint-down(xs) {
   .gallery-container {
@@ -18,4 +32,10 @@
       top: 70%;
     }
   }
+  .card-container{
+    .card-title{
+      font-size: 25px;
+    }
+  }
 }
+

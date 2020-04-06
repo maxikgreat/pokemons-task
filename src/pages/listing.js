@@ -17,7 +17,10 @@ export const Listing = () => {
                 <CardCustom
                     key = {index}
                     name = {pok.name}
+                    abilities={pok.abilities}
+                    base_exp = {pok.base_experience}
                     sprites = {pok.sprites}
+                    types = {pok.types}
                 />
             )
         })

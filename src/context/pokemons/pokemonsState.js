@@ -21,7 +21,7 @@ export const PokemonState = ({children}) => {
 
     const fetchList = async (limit = 20) => {
 
-        let baseUrl = `https://pokeapi.co/api/v2/pokemon?offset=20&limit=${limit}`;
+        let baseUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
         await axios.get(baseUrl)
             .then((response) => {
@@ -36,11 +36,23 @@ export const PokemonState = ({children}) => {
             .then(arrayOfPromises => {
                 Promise.all(arrayOfPromises)
                     .then(data => {
+                        const listing = [];
+                        data.forEach(item => {
+                            //get only needed properties
+                            listing.push({
+                                id: item.id,
+                                name: item.name,
+                                abilities: item.abilities,
+                                base_experience: item.base_experience,
+                                sprites: item.sprites,
+                                types: item.types
+                            })
+                        });
                         dispatch({
                             type: FETCH_MAIN_LIST,
-                            payload: data
+                            payload: listing
                         });
-                        showAlert('success', "Pokemon's list loaded");
+                        showAlert('success', "Pokemon's list loaded. Have a fun :)");
                     })
             })
             .catch(e => {

@@ -5,9 +5,15 @@ import { useSpring, animated } from 'react-spring'
 import {Carousel} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-
-
 export const Gallery = ({setVisible, sprites}) => {
+
+    useEffect(() => {
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape'){
+                closeGallery();
+            }
+        })
+    }, []);
 
     const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1];
     const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
@@ -16,10 +22,6 @@ export const Gallery = ({setVisible, sprites}) => {
         document.body.style.overflow = 'auto';
         setVisible(false);
     };
-
-    useEffect(() => {
-        console.log("hello");
-    }, []);
 
     const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }));
 

@@ -1,15 +1,17 @@
 
 
 import React, {useState} from 'react'
-import {Card, Button, ProgressBar} from 'react-bootstrap'
+import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
 import {Gallery} from "./Gallery";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const CardCustom = ({name, sprites}) => {
+export const CardCustom = ({name, abilities, base_exp, sprites, types}) => {
 
     const [galleryVisible, setGalleryVisible] = useState(false);
 
     const openGallery = () => {
         document.body.style.overflow = 'hidden';
+        //document.querySelector('html').style.overflow = 'hidden';
         setGalleryVisible(true);
     };
 
@@ -21,6 +23,19 @@ export const CardCustom = ({name, sprites}) => {
             }
         });
         return filteredSprites
+    };
+
+    const renderTypes = () => {
+        return types.map(({type}, index) => {
+            return (
+                <Badge
+                    key={index}
+                    variant={'primary'}
+                    className={'mb-2 mr-1'}
+                >{type.name.toUpperCase()}
+                </Badge>
+            )
+        })
     };
 
 
@@ -41,13 +56,21 @@ export const CardCustom = ({name, sprites}) => {
                         onClick = {() => {openGallery()}}
                     />
                     <Card.Body>
-                        <Card.Title>{name.toUpperCase()}</Card.Title>
-                        {/*<ProgressBar now={50} variant={'success'}/>*/}
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </Card.Text>
-                        <Button variant="success">Go somewhere</Button>
+                        <Card.Title>
+                            {name.toUpperCase()}
+                            <div className="abilities-container" title="Abilities">
+                                <FontAwesomeIcon icon={'meteor'} /> x {abilities.length}
+                            </div>
+                        </Card.Title>
+                        {renderTypes()}
+                        <ProgressBar
+                            now={base_exp}
+                            variant={base_exp < 100 ? 'danger' : base_exp > 100 && base_exp < 200 ? 'warning' : 'success'}
+                            label={`${base_exp} exp.`}
+                            max={300}
+                            className={'mb-2'}
+                        />
+                        <Button variant="success">Pick</Button>
                     </Card.Body>
                 </Card>
             </div>

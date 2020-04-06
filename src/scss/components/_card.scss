@@ -1,11 +1,46 @@
 
 .card-container{
-  margin-bottom: 5px;
   padding: 0;
   .card{
+    @include transition(all .2s ease);
+    border: 1px solid $success;
+    margin: 2px;
     .card-img-top:hover{
       cursor: zoom-in;
     }
+    &:hover{
+      background-color: lighten($success, 50%);
+    }
+  }
+  .badge{
+    font-size: 13px;
+  }
+  .card-title{
+    font-weight: bold;
+    display: flex;
+    font-size: 17px;
+    justify-content: space-between;
+    align-items: center;
+    .abilities-container{
+      display: flex;
+      align-items: center;
+      svg{
+        @include transition(color .2s ease);
+        &:hover{
+          color: $success;
+        }
+      }
+    }
+    svg{
+      position: relative;
+      font-size: 30px;
+    }
+  }
+  .progress {
+    height: 20px;
+  }
+  button{
+    width: 100%;
   }
 
 }
