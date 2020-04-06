@@ -3,6 +3,8 @@
 @import 'bootstrap_theme/bootswatch';
 //mixins
 @import 'mixins/box-shadow.scss';
+@import 'mixins/transitions.scss';
+@import 'mixins/keyframes.scss';
 //components && pages
 @import 'listing.scss';
 @import './components/card.scss';
@@ -26,4 +28,6 @@ body {
   font-weight: bold;
   color: $danger;
 }
+
+@import 'respo.scss';
 

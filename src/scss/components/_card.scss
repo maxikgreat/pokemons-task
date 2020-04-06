@@ -2,4 +2,10 @@
 .card-container{
   margin-bottom: 5px;
   padding: 0;
+  .card{
+    .card-img-top:hover{
+      cursor: zoom-in;
+    }
+  }
+
 }

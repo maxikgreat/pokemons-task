@@ -13,12 +13,23 @@ export const CardCustom = ({name, sprites}) => {
         setGalleryVisible(true);
     };
 
+    const filterSprites = (sprites) => {
+        const filteredSprites = [];
+        Object.values(sprites).forEach(sprite => {
+            if(sprite) {
+                filteredSprites.push(sprite);
+            }
+        });
+        return filteredSprites
+    };
+
 
     return(
         <>
             <Gallery
                 visible = {galleryVisible}
                 setVisible = {setGalleryVisible}
+                sprites={filterSprites(sprites)}
             />
             <div className='card-container col-12 col-sm-6 col-md-4 col-lg-3'>
                 <Card>

@@ -1,0 +1,21 @@
+
+
+// mobile screens
+@include media-breakpoint-down(xs) {
+  .gallery-container {
+    img.photo{
+      width: 30ch;
+      height: 30ch;
+      top: calc(50% - (30ch /2));
+      left: calc(50% - (30ch /2));
+    }
+    .carousel-control-prev {
+      left: 20%;
+      top: 70%;
+    }
+    .carousel-control-next {
+      right: 20%;
+      top: 70%;
+    }
+  }
+}

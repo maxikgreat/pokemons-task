@@ -4,6 +4,11 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 //components
 import {Listing} from "./pages/listing";
 import {Pokemon} from "./pages/pokemon";
+//icons
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons";
+import {library} from "@fortawesome/fontawesome-svg-core";
+
+library.add(faTimesCircle);
 
 function App() {
     return(
