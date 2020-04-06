@@ -1,11 +1,18 @@
 
 
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import { useSpring, animated } from 'react-spring'
 import {Carousel} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const Gallery = ({setVisible, sprites}) => {
+
+    const _gallery = useRef();
+
+    useEffect(() => {
+        //todo iphone fix scrolling
+        _gallery.current.style.overflow = 'hidden';
+    }, []);
 
     useEffect(() => {
         document.addEventListener('keydown', (e) => {
@@ -42,7 +49,7 @@ export const Gallery = ({setVisible, sprites}) => {
     };
 
     return(
-        <div className='gallery-container'>
+        <div className='gallery-container' ref={_gallery}>
             <FontAwesomeIcon
                 icon='times-circle'
                 onClick = {() => closeGallery()}
