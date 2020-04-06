@@ -1,7 +1,7 @@
 
 
 import React, {useState} from 'react'
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button, ProgressBar} from 'react-bootstrap'
 import {Gallery} from "./Gallery";
 
 export const CardCustom = ({name, sprites}) => {
@@ -26,11 +26,13 @@ export const CardCustom = ({name, sprites}) => {
 
     return(
         <>
-            <Gallery
-                visible = {galleryVisible}
-                setVisible = {setGalleryVisible}
-                sprites={filterSprites(sprites)}
-            />
+            {
+                galleryVisible ?
+                    <Gallery
+                        setVisible = {setGalleryVisible}
+                        sprites={filterSprites(sprites)}
+                    /> : null
+            }
             <div className='card-container col-12 col-sm-6 col-md-4 col-lg-3'>
                 <Card>
                     <Card.Img
@@ -40,11 +42,12 @@ export const CardCustom = ({name, sprites}) => {
                     />
                     <Card.Body>
                         <Card.Title>{name.toUpperCase()}</Card.Title>
+                        {/*<ProgressBar now={50} variant={'success'}/>*/}
                         <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="success">Go somewhere</Button>
                     </Card.Body>
                 </Card>
             </div>

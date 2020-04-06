@@ -1,21 +1,27 @@
 
 
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSpring, animated } from 'react-spring'
 import {Carousel} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1];
-const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
-export const Gallery = ({visible, setVisible, sprites}) => {
 
-    const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }));
+export const Gallery = ({setVisible, sprites}) => {
+
+    const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1];
+    const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
     const closeGallery = () => {
         document.body.style.overflow = 'auto';
         setVisible(false);
     };
+
+    useEffect(() => {
+        console.log("hello");
+    }, []);
+
+    const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }));
 
     const renderPhotos = () => {
         return sprites.map((sprite, index) => {
@@ -31,22 +37,18 @@ export const Gallery = ({visible, setVisible, sprites}) => {
                 </Carousel.Item>
             )
         })
-    }
+    };
 
-    if(visible){
-        return(
-            <div className='gallery-container'>
-                <FontAwesomeIcon
-                    icon='times-circle'
-                    onClick = {() => closeGallery()}
-                />
-                <Carousel indicators={false}>
-                    {renderPhotos()}
-                </Carousel>
-            </div>
-        )
-    }
-
-    return null
+    return(
+        <div className='gallery-container'>
+            <FontAwesomeIcon
+                icon='times-circle'
+                onClick = {() => closeGallery()}
+            />
+            <Carousel indicators={false}>
+                {renderPhotos()}
+            </Carousel>
+        </div>
+    )
 
 };

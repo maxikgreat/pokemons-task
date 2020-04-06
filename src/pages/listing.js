@@ -11,10 +11,6 @@ export const Listing = () => {
 
     const {fetchList, pokemons} = useContext(PokemonsContext);
 
-    useEffect(() => {
-        // fetchList();
-    },[]);
-
     const renderPoks = () => {
         return pokemons.listing.map((pok, index) => {
             return(
@@ -30,6 +26,7 @@ export const Listing = () => {
     return(
 
         <section className='section-listing'>
+            {console.log(pokemons.listing)}
             <AlertCustom
                 alert = {pokemons.alert}
             />
