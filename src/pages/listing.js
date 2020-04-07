@@ -25,7 +25,7 @@ export const Listing = () => {
     const [order, setOrder] = useState('default');
 
     useEffect(() => {
-        dispatch(setActive(null));
+        dispatch(setActive(null, {showAlert, hideAlert}));
         if(pokemons.ready){
             dispatch(fetchList(pokemons.count, {showAlert, hideAlert}))
         }
@@ -116,10 +116,7 @@ export const Listing = () => {
                 />
             </div>
             { pokemons.loading
-                ? <Loader
-                    readyToFetch={setReadyToFetch}
-                    dispatch = {dispatch}
-                />
+                ? <Loader />
                 : <div className='listing-container row'>
                     {renderPoks()}
                 </div>

@@ -1,5 +1,5 @@
 import {
-    FETCH_MAIN_LIST,
+    FETCH_MAIN_LIST, GET_ACTIVE_POKEMON,
     GET_MAX_COUNT,
     HIDE_LOADER,
     READY_TO_LOAD,
@@ -82,8 +82,40 @@ export const fetchList = (limit = 20, callBack) => {
     }
 };
 
-export const setActive = (id) => {
+export const setActive = (id, callback) => {
     return async dispatch => {
-        console.log("Set active redux")
+
+        dispatch({
+            type: SHOW_LOADER
+        });
+
+        let baseUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+        let activePok = {};
+
+        await axios.get(baseUrl)
+            .then(response => {
+                activePok = {...response.data};
+                return axios.get(response.data.species.url)
+                    .then(response => {
+                        activePok.species = {...response.data};
+                        dispatch({
+                            type: GET_ACTIVE_POKEMON,
+                            payload: activePok
+                        });
+                        dispatch({
+                            type: HIDE_LOADER
+                        });
+                    })
+            })
+            .catch(e => {
+                dispatch(callback.showAlert('danger', `Error! ${e.message}`));
+                setTimeout(() => {
+                    dispatch(callback.hideAlert());
+                }, 3000);
+                dispatch({
+                    type: HIDE_LOADER
+                });
+            })
     }
 };

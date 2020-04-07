@@ -14,7 +14,7 @@ const initialState = {
     ready: false,
     maxCount: null,
     count: 20, // default
-    loading: true,
+    loading: false,
     listing: [],
     activePokemon: null
 };
