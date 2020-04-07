@@ -2,11 +2,11 @@
 import React, {useReducer} from 'react'
 import axios from 'axios'
 import {
-    FETCH_MAIN_LIST,
+    FETCH_MAIN_LIST, GET_ACTIVE_POKEMON,
     GET_MAX_COUNT,
     HIDE_ALERT,
     HIDE_LOADER,
-    READY_TO_LOAD,
+    READY_TO_LOAD, SET_POKEMONS_COUNT,
     SHOW_ALERT,
     SHOW_LOADER
 } from "../types";
@@ -21,8 +21,10 @@ const initialState = {
     },
     ready: false,
     maxCount: null,
+    count: 20, // default
     loading: true,
-    listing: []
+    listing: [],
+    activePokemon: null
 };
 
 export const PokemonState = ({children}) => {
@@ -30,6 +32,11 @@ export const PokemonState = ({children}) => {
     const [state, dispatch] = useReducer(pokemonsReducer, initialState);
 
     const fetchList = async (limit = 20) => {
+
+        dispatch({
+            type: SET_POKEMONS_COUNT,
+            payload: limit
+        });
 
         dispatch({
             type: SHOW_LOADER
@@ -101,14 +108,28 @@ export const PokemonState = ({children}) => {
         }, 3000);
     };
 
+    const setCount = (value) => {
+        dispatch({
+            type: SET_POKEMONS_COUNT,
+            payload: value
+        })
+    };
+
+    const setActive = (pok) => {
+        dispatch({
+            type: GET_ACTIVE_POKEMON,
+            payload: pok
+        })
+    };
+
     const ready = () => {
         dispatch({
             type: READY_TO_LOAD
         })
-    }
+    };
 
     return (
-        <PokemonsContext.Provider value={{showAlert, ready, fetchList, pokemons: state}}>
+        <PokemonsContext.Provider value={{showAlert, ready, fetchList, setCount, setActive, pokemons: state}}>
             {children}
         </PokemonsContext.Provider>
     )

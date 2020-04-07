@@ -7,6 +7,7 @@ import {Pokemon} from "./pages/pokemon";
 //icons
 import {faTimesCircle, faMeteor, faSadCry} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
+//animation
 
 library.add(faTimesCircle, faMeteor, faSadCry);
 

@@ -9,6 +9,7 @@
 @import 'mixins/keyframes.scss';
 //components && pages
 @import 'listing.scss';
+@import 'pokemon.scss';
 @import './components/card.scss';
 @import './components/alert.scss';
 @import './components/loader.scss';
@@ -24,6 +25,11 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+}
+section{
+  height: 100%;
 }
 
 .special-text{

@@ -13,21 +13,20 @@ import {OrderOptions} from "../components/OrderOptions";
 
 export const Listing = () => {
 
-    const {showAlert, fetchList, pokemons} = useContext(PokemonsContext);
+    const {showAlert, fetchList, setActive, pokemons} = useContext(PokemonsContext);
 
     const [finder, setFinder] = useState('');
     const [order, setOrder] = useState('default');
 
     useEffect(() => {
+        setActive(null);
         if(pokemons.ready){
-            fetchList(20); // default count
+            fetchList(pokemons.count); // default count
         }
     }, [pokemons.ready]);
 
 
     const renderPoks = () => {
-
-        console.log(order);
 
         let sorted = [...pokemons.listing];
 
@@ -75,6 +74,7 @@ export const Listing = () => {
                     base_exp = {pok.base_experience}
                     sprites = {pok.sprites}
                     types = {pok.types}
+                    setActive = {setActive}
                 />)
         });
 
@@ -102,7 +102,6 @@ export const Listing = () => {
                     maxCount = {pokemons.maxCount}
                     showAlert ={showAlert}
                     fetchList = {fetchList}
-                    setOrder = {setOrder}
                 />
                 <OrderOptions
                     setOrder = {setOrder}

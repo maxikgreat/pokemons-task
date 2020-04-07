@@ -1,9 +1,10 @@
 import {
-    FETCH_MAIN_LIST,
+    FETCH_MAIN_LIST, GET_ACTIVE_POKEMON,
     GET_MAX_COUNT,
     HIDE_ALERT,
     HIDE_LOADER,
     READY_TO_LOAD,
+    SET_POKEMONS_COUNT,
     SHOW_ALERT,
     SHOW_LOADER
 } from "../types";
@@ -42,6 +43,12 @@ const handlers = {
             ready: true
         }
     )},
+    [SET_POKEMONS_COUNT]: (state, {payload}) => {return(
+        {
+            ...state,
+            count: payload
+        }
+    )},
     [GET_MAX_COUNT]: (state, {payload}) => {return(
         {
             ...state,
@@ -52,6 +59,12 @@ const handlers = {
         {
             ...state,
             listing: payload
+        }
+    )},
+    [GET_ACTIVE_POKEMON]: (state, {payload}) => {return(
+        {
+            ...state,
+            activePokemon: payload
         }
     )},
     DEFAULT: state => state

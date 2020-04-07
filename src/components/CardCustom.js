@@ -2,11 +2,11 @@
 
 import React, {useState} from 'react'
 import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
-import {Gallery} from "./Gallery";
+import {PopupGallery} from "./PopupGallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 
-export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
+export const CardCustom = ({name, id, abilities, base_exp, sprites, types, setActive}) => {
 
     const [galleryVisible, setGalleryVisible] = useState(false);
 
@@ -44,7 +44,7 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
         <>
             {
                 galleryVisible ?
-                    <Gallery
+                    <PopupGallery
                         setVisible = {setGalleryVisible}
                         sprites={filterSprites(sprites)}
                     /> : null
@@ -71,7 +71,12 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
                             max={300}
                             className={'mb-2'}
                         />
-                        <Link to={`/pokemon/${id}`}>
+                        <Link
+                            to={`/pokemon/${id}`}
+                            onClick = {() => setActive({
+                                id, name, abilities, base_exp, sprites, types
+                            })}
+                        >
                             <Button variant="success">Pick</Button>
                         </Link>
                     </Card.Body>

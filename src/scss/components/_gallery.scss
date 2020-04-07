@@ -20,7 +20,7 @@
   }
 }
 
-.gallery-container{
+.popup-gallery-container{
   @include animation('container-fade-in .5s 1 cubic-bezier(.65,.82,.34,.94)');
   background: rgba(0,0,0,0.8);
   position: fixed;

@@ -1,7 +1,7 @@
 
 import React,{useState} from 'react'
 
-export const ListLoader = ({maxCount, showAlert, fetchList, setOrder}) => {
+export const ListLoader = ({maxCount, showAlert, fetchList}) => {
 
     const [poksNumber, setPoksNumber] = useState('');
 
