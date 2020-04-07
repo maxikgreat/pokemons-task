@@ -4,10 +4,10 @@ import {Alert} from "react-bootstrap";
 
 export const AlertCustom = ({alert}) => {
 
-    if(alert.show){
+    if(alert.isOpen){
         return(
-            <Alert variant={alert.variant}>
-                {alert.message}
+            <Alert variant={alert.type}>
+                {alert.text}
             </Alert>
         )
     }

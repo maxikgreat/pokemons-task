@@ -1,6 +1,5 @@
 
-import React, {useContext, useState, useEffect} from 'react'
-import {PokemonsContext} from "../context/pokemons/pokemonsContext";
+import React, {useState, useEffect} from 'react'
 import {Loader} from "../components/UI/Loader";
 import {CardCustom} from "../components/CardCustom";
 import {Jumbotron, Container} from "react-bootstrap";
@@ -9,20 +8,28 @@ import {Finder} from "../components/Finder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ListLoader} from "../components/ListLoader";
 import {OrderOptions} from "../components/OrderOptions";
+//redux
+import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {fetchList, setActive, setReadyToFetch} from "../redux/pokemons/pokemonsState";
+import {showAlert, hideAlert} from "../redux/alert/alertState";
 
 
 export const Listing = () => {
 
-    const {showAlert, fetchList, setActive, pokemons} = useContext(PokemonsContext);
+    const alert = useSelector(state => state.alert);
+    const pokemons = useSelector(state => state.pokemons);
+    const dispatch = useDispatch();
 
     const [finder, setFinder] = useState('');
     const [order, setOrder] = useState('default');
 
     useEffect(() => {
-        setActive(null);
+        dispatch(setActive(null));
         if(pokemons.ready){
-            fetchList(pokemons.count); // default count
+            dispatch(fetchList(pokemons.count, {showAlert, hideAlert}))
         }
+        console.log(pokemons);
     }, [pokemons.ready]);
 
 
@@ -74,7 +81,6 @@ export const Listing = () => {
                     base_exp = {pok.base_experience}
                     sprites = {pok.sprites}
                     types = {pok.types}
-                    setActive = {setActive}
                 />)
         });
 
@@ -83,7 +89,7 @@ export const Listing = () => {
     return(
         <section className='section-listing'>
             <AlertCustom
-                alert = {pokemons.alert}
+                alert = {alert}
             />
             <Jumbotron fluid>
                 <Container>
@@ -101,14 +107,19 @@ export const Listing = () => {
                 <ListLoader
                     maxCount = {pokemons.maxCount}
                     showAlert ={showAlert}
+                    hideAlert={hideAlert}
                     fetchList = {fetchList}
+                    dispatch = {dispatch}
                 />
                 <OrderOptions
                     setOrder = {setOrder}
                 />
             </div>
             { pokemons.loading
-                ? <Loader/>
+                ? <Loader
+                    readyToFetch={setReadyToFetch}
+                    dispatch = {dispatch}
+                />
                 : <div className='listing-container row'>
                     {renderPoks()}
                 </div>

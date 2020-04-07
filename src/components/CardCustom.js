@@ -6,7 +6,7 @@ import {PopupGallery} from "./PopupGallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 
-export const CardCustom = ({name, id, abilities, base_exp, sprites, types, setActive}) => {
+export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
 
     const [galleryVisible, setGalleryVisible] = useState(false);
 
@@ -73,9 +73,6 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types, setAc
                         />
                         <Link
                             to={`/pokemon/${id}`}
-                            onClick = {() => setActive({
-                                id, name, abilities, base_exp, sprites, types
-                            })}
                         >
                             <Button variant="success">Pick</Button>
                         </Link>

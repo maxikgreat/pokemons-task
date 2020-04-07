@@ -1,7 +1,7 @@
 
 import React,{useState} from 'react'
 
-export const ListLoader = ({maxCount, showAlert, fetchList}) => {
+export const ListLoader = ({maxCount, fetchList, showAlert, hideAlert, dispatch}) => {
 
     const [poksNumber, setPoksNumber] = useState('');
 
@@ -13,11 +13,17 @@ export const ListLoader = ({maxCount, showAlert, fetchList}) => {
 
     const checkInput = () => {
         if(!poksNumber || poksNumber <= 0){
-            showAlert('danger', "Number must be positive. Be positive :)")
+            dispatch(showAlert('danger', "Number must be positive. Be positive :)"));
+            setTimeout(() => {
+                dispatch(hideAlert());
+            }, 3000)
         } else if (poksNumber > maxCount){
-            showAlert('danger', `Max count is ${maxCount}. I know, that's You know it :)`)
+            dispatch(showAlert('danger', `Max count is ${maxCount}. I know, that's You know it :)`));
+            setTimeout(() => {
+                dispatch(hideAlert());
+            }, 3000)
         } else {
-            fetchList(poksNumber);
+            dispatch(fetchList(poksNumber, {showAlert, hideAlert}));
             setPoksNumber('');
         }
     };
