@@ -8,6 +8,7 @@ import {AlertCustom} from "../components/AlertCustom";
 import {Finder} from "../components/Finder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ListLoader} from "../components/ListLoader";
+import {OrderOptions} from "../components/OrderOptions";
 
 
 export const Listing = () => {
@@ -15,6 +16,7 @@ export const Listing = () => {
     const {showAlert, fetchList, pokemons} = useContext(PokemonsContext);
 
     const [finder, setFinder] = useState('');
+    const [order, setOrder] = useState('default');
 
     useEffect(() => {
         if(pokemons.ready){
@@ -24,7 +26,30 @@ export const Listing = () => {
 
 
     const renderPoks = () => {
-        const filtered = pokemons.listing
+
+        console.log(order);
+
+        let sorted = [...pokemons.listing];
+
+        switch(order){
+            case 'name':
+                sorted.sort((leftHand, rightHand) => {
+                    return leftHand.name.toLowerCase() > rightHand.name.toLowerCase() ? 1 : -1
+                });
+                break;
+            case 'experience':
+                sorted.sort((leftHand, rightHand) => {
+                    return leftHand.base_experience < rightHand.base_experience ? 1 : -1
+                });
+                break;
+            case 'default':
+                sorted = [...pokemons.listing];
+                break;
+            default:
+                break;
+        }
+
+        const filtered = sorted
             .filter(pok => {
                 if ((finder.substring(0, finder.length) === pok.name.substring(0, finder.length).toLowerCase())) {
                     return pok
@@ -55,8 +80,6 @@ export const Listing = () => {
 
     };
 
-
-
     return(
         <section className='section-listing'>
             <AlertCustom
@@ -79,6 +102,10 @@ export const Listing = () => {
                     maxCount = {pokemons.maxCount}
                     showAlert ={showAlert}
                     fetchList = {fetchList}
+                    setOrder = {setOrder}
+                />
+                <OrderOptions
+                    setOrder = {setOrder}
                 />
             </div>
             { pokemons.loading

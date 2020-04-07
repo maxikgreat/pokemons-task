@@ -1,6 +1,6 @@
 
 
-import React, {useRef, useState} from 'react'
+import React, {useState} from 'react'
 import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
 import {Gallery} from "./Gallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -9,7 +9,6 @@ import {Link} from "react-router-dom";
 export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
 
     const [galleryVisible, setGalleryVisible] = useState(false);
-
 
     const openGallery = () => {
         document.body.style.overflowY = 'hidden';

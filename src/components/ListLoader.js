@@ -1,7 +1,7 @@
 
 import React,{useState} from 'react'
 
-export const ListLoader = ({maxCount, showAlert, fetchList}) => {
+export const ListLoader = ({maxCount, showAlert, fetchList, setOrder}) => {
 
     const [poksNumber, setPoksNumber] = useState('');
 
@@ -18,11 +18,12 @@ export const ListLoader = ({maxCount, showAlert, fetchList}) => {
             showAlert('danger', `Max count is ${maxCount}. I know, that's You know it :)`)
         } else {
             fetchList(poksNumber);
+            setPoksNumber('');
         }
     };
 
     return(
-        <div className="input-group">
+        <div className="input-group mb-3">
             <div className="input-group-prepend">
                 <button
                     className="btn btn-success"
