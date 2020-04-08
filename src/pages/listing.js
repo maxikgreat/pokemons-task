@@ -11,31 +11,29 @@ import {OrderOptions} from "../components/OrderOptions";
 //redux
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
-import {fetchList, setActive, setReadyToFetch} from "../redux/pokemons/pokemonsState";
+import {fetchList} from "../redux/pokemons/listingState";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
 
 
 export const Listing = () => {
 
     const alert = useSelector(state => state.alert);
-    const pokemons = useSelector(state => state.pokemons);
+    const listing = useSelector(state => state.listing);
     const dispatch = useDispatch();
 
     const [finder, setFinder] = useState('');
     const [order, setOrder] = useState('default');
 
     useEffect(() => {
-        dispatch(setActive(null, {showAlert, hideAlert}));
-        if(pokemons.ready){
-            dispatch(fetchList(pokemons.count, {showAlert, hideAlert}))
+        if(listing.ready){
+            dispatch(fetchList(listing.count, {showAlert, hideAlert}))
         }
-        console.log(pokemons);
-    }, [pokemons.ready]);
+    }, [listing.ready]);
 
 
     const renderPoks = () => {
 
-        let sorted = [...pokemons.listing];
+        let sorted = [...listing.listing];
 
         switch(order){
             case 'name':
@@ -49,7 +47,7 @@ export const Listing = () => {
                 });
                 break;
             case 'default':
-                sorted = [...pokemons.listing];
+                sorted = [...listing.listing];
                 break;
             default:
                 break;
@@ -105,7 +103,7 @@ export const Listing = () => {
                     setFinder = {setFinder}
                 />
                 <ListLoader
-                    maxCount = {pokemons.maxCount}
+                    maxCount = {listing.maxCount}
                     showAlert ={showAlert}
                     hideAlert={hideAlert}
                     fetchList = {fetchList}
@@ -115,7 +113,7 @@ export const Listing = () => {
                     setOrder = {setOrder}
                 />
             </div>
-            { pokemons.loading
+            { listing.loading
                 ? <Loader />
                 : <div className='listing-container row'>
                     {renderPoks()}

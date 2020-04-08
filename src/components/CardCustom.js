@@ -5,6 +5,7 @@ import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
 import {PopupGallery} from "./PopupGallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
+import {deleteUndefinedNullValues} from "../helpFunctions/deleteUndefindeNullValues";
 
 export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
 
@@ -14,16 +15,6 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
         document.body.style.overflowY = 'hidden';
         document.body.style.position = 'relative';
         setGalleryVisible(true);
-    };
-
-    const filterSprites = (sprites) => {
-        const filteredSprites = [];
-        Object.values(sprites).forEach(sprite => {
-            if(sprite) {
-                filteredSprites.push(sprite);
-            }
-        });
-        return filteredSprites
     };
 
     const renderTypes = () => {
@@ -46,7 +37,7 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
                 galleryVisible ?
                     <PopupGallery
                         setVisible = {setGalleryVisible}
-                        sprites={filterSprites(sprites)}
+                        sprites={deleteUndefinedNullValues(sprites)}
                     /> : null
             }
             <div className='card-container col-12 col-sm-6 col-md-4 col-lg-3'>

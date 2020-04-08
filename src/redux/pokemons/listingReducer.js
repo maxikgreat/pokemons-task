@@ -1,11 +1,9 @@
 import {
-    FETCH_MAIN_LIST, GET_ACTIVE_POKEMON,
+    FETCH_MAIN_LIST,
     GET_MAX_COUNT,
-    HIDE_ALERT,
     HIDE_LOADER,
     READY_TO_LOAD,
     SET_POKEMONS_COUNT,
-    SHOW_ALERT,
     SHOW_LOADER
 } from "../actionTypes";
 
@@ -14,13 +12,12 @@ const initialState = {
     ready: false,
     maxCount: null,
     count: 20, // default
-    loading: false,
-    listing: [],
-    activePokemon: null
+    loading: true,
+    listing: []
 };
 
 
-export const pokemonsReducer = (state = initialState, {type, payload}) => {
+export const listingReducer = (state = initialState, {type, payload}) => {
     switch(type){
         case SHOW_LOADER:
             return{
@@ -51,11 +48,6 @@ export const pokemonsReducer = (state = initialState, {type, payload}) => {
             return{
                 ...state,
                 listing: payload
-            };
-        case GET_ACTIVE_POKEMON:
-            return {
-                ...state,
-                activePokemon: payload
             };
         default:
             return state

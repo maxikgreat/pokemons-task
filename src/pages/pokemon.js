@@ -5,38 +5,44 @@ import {Gallery} from "../components/Gallery";
 import {useParams} from 'react-router-dom'
 import {Loader} from "../components/UI/Loader";
 import {useSelector, useDispatch} from "react-redux";
-import {setActive} from '../redux/pokemons/pokemonsState'
+import {showAlert, hideAlert} from "../redux/alert/alertState";
+import {setActive} from '../redux/pokemons/activeState'
+import {Stats} from "../components/Stats";
+import {formStats} from "../helpFunctions/formStats";
 
 export const Pokemon = () => {
 
-    const pokemons = useSelector(state => state.pokemons);
+    const pokemon = useSelector(state => state.pokemon);
     const dispatch = useDispatch();
 
     const {id} = useParams();
 
     useEffect(() => {
-        console.log(id);
-        dispatch(setActive(id));
+        dispatch(setActive(id, {showAlert, hideAlert}));
     }, []);
 
     return(
        <section className='section-pokemon'>
            {
-               pokemons.loading
+               pokemon.loading
                ? <Loader/>
-               : <div className='row'>
-                       <div className='part-left col-5'>
-                           {/*<div className='gallery-container'>*/}
-                           {/*    <Gallery*/}
-                           {/*        sprites = {pokemons.activePokemon.sprites}*/}
-                           {/*    />*/}
-                           {/*    {console.log(pokemons.activePokemon)}*/}
-                           {/*</div>*/}
+               : <>
+                   <div className='row'>
+                       <div className='col-5'>
+                           <Gallery
+                               sprites = {pokemon.activePokemon.sprites}
+                           />
                        </div>
-                       <div className='part-right col-7'>
-                           suka 2
+                       <div className='col-7'>
+                           <Stats
+                               stats = {formStats(pokemon.activePokemon)}
+                           />
                        </div>
                    </div>
+                   <div className='row'>
+                       <h1>Abilities</h1>
+                   </div>
+                   </>
            }
        </section>
     )

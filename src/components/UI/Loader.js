@@ -1,7 +1,7 @@
 
 import React from 'react'
 import splash from '../../assets/images/splash.gif'
-import {setReadyToFetch} from "../../redux/pokemons/pokemonsState";
+import {setReadyToFetch} from "../../redux/pokemons/listingState";
 import {useDispatch} from "react-redux";
 
 export const Loader = () => {

@@ -1,9 +1,11 @@
 
 import {combineReducers} from "redux";
 import {alertReducer} from "./alert/alertReducer";
-import {pokemonsReducer} from "./pokemons/pokemonsReducer";
+import {listingReducer} from "./pokemons/listingReducer";
+import {activeReducer} from "./pokemons/activeReducer";
 
 export const rootReducer = combineReducers({
     alert: alertReducer,
-    pokemons: pokemonsReducer
+    listing: listingReducer,
+    pokemon: activeReducer
 });
