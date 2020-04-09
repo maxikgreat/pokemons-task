@@ -20,6 +20,30 @@
     margin: 10px;
   }
 
+  section.section-abilities{
+    .abilities-container{
+      margin: 10px;
+      .skill-container {
+        max-width: 100px;
+        .card{
+          .card-body{
+            padding: 5px;
+            .card-title{
+              display: flex;
+              align-items: center;
+              min-height: 30px;
+              font-size: 11px;
+            }
+            button{
+              padding: 5px;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
 // mobile screens
 @include media-breakpoint-down(xs) {

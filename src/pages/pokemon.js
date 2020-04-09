@@ -23,7 +23,6 @@ export const Pokemon = () => {
 
     return(
        <section className='section-pokemon'>
-           {console.log(pokemon)}
            {
                pokemon.loading
                ? <Loader/>

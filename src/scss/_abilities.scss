@@ -1,0 +1,25 @@
+
+section.section-abilities {
+  .abilities-container{
+    margin: 50px;
+    justify-content: center;
+    .skill-container{
+      padding: 5px;
+      .card{
+        @include transition(all .2s easy);
+        border-width: 3px;
+        img{
+          width: 100%;
+        }
+        .card-title{
+          font-size: 13px;
+          font-weight: bold;
+        }
+        &:hover{
+          background-color: lighten($success, 50%);
+        }
+      }
+    }
+
+  }
+}

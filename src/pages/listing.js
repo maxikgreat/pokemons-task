@@ -13,6 +13,7 @@ import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {fetchList} from "../redux/pokemons/listingState";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
+import {fetchAbilities} from "../redux/abilities/abilitiesState";
 
 
 export const Listing = () => {
@@ -25,6 +26,7 @@ export const Listing = () => {
     const [order, setOrder] = useState('default');
 
     useEffect(() => {
+        dispatch(fetchAbilities());
         if(listing.ready){
             dispatch(fetchList(listing.count, {showAlert, hideAlert}))
         }
