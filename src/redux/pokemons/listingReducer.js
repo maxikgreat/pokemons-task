@@ -1,10 +1,10 @@
 import {
     FETCH_MAIN_LIST,
     GET_MAX_COUNT,
-    HIDE_LOADER,
+    HIDE_LOADER_LISTING,
     READY_TO_LOAD,
     SET_POKEMONS_COUNT,
-    SHOW_LOADER
+    SHOW_LOADER_LISTING
 } from "../actionTypes";
 
 
@@ -19,12 +19,12 @@ const initialState = {
 
 export const listingReducer = (state = initialState, {type, payload}) => {
     switch(type){
-        case SHOW_LOADER:
+        case SHOW_LOADER_LISTING:
             return{
                 ...state,
                 loading: true
             };
-        case HIDE_LOADER:
+        case HIDE_LOADER_LISTING:
             return{
                 ...state,
                 loading: false

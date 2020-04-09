@@ -2,17 +2,24 @@
 
 @include media-breakpoint-down(sm){
 
-  .card-container {
-    .card-title{
-      font-size: 20px;
-    }
-    .badge {
-      font-size: 17px;
-    }
-    .progress {
-      height: 30px;
+  section.section-listing{
+    .card-container {
+      .card-title{
+        font-size: 20px;
+      }
+      .badge {
+        font-size: 17px;
+      }
+      .progress {
+        height: 30px;
+      }
     }
   }
+
+  section.section-pokemon{
+    margin: 10px;
+  }
+
 }
 // mobile screens
 @include media-breakpoint-down(xs) {

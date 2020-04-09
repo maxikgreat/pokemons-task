@@ -19,21 +19,23 @@ export const Pokemon = () => {
 
     useEffect(() => {
         dispatch(setActive(id, {showAlert, hideAlert}));
-    }, []);
+    }, [id]);
 
     return(
        <section className='section-pokemon'>
+           {console.log(pokemon)}
            {
                pokemon.loading
                ? <Loader/>
                : <>
-                   <div className='row'>
-                       <div className='col-5'>
+                   <div className='row d-flex align-items-center'>
+                       {console.log(pokemon.activePokemon)}
+                       <div className='col-md-5 col-12'>
                            <Gallery
                                sprites = {pokemon.activePokemon.sprites}
                            />
                        </div>
-                       <div className='col-7'>
+                       <div className='col-md-7 col-12'>
                            <Stats
                                stats = {formStats(pokemon.activePokemon)}
                            />

@@ -1,5 +1,5 @@
 
-import {HIDE_LOADER, SET_ACTIVE_POKEMON, SHOW_LOADER} from "../actionTypes";
+import {HIDE_LOADER_POKEMON, SET_ACTIVE_POKEMON, SHOW_LOADER_POKEMON} from "../actionTypes";
 
 const initialState = {
     loading: true,
@@ -8,12 +8,12 @@ const initialState = {
 
 export const activeReducer = (state = initialState, {type, payload}) => {
     switch (type) {
-        case SHOW_LOADER:
+        case SHOW_LOADER_POKEMON:
             return{
                 ...state,
                 loading: true
             };
-        case HIDE_LOADER:
+        case HIDE_LOADER_POKEMON:
             return{
                 ...state,
                 loading: false

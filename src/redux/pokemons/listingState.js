@@ -1,10 +1,10 @@
 import {
     FETCH_MAIN_LIST,
     GET_MAX_COUNT,
-    HIDE_LOADER,
+    HIDE_LOADER_LISTING,
     READY_TO_LOAD,
     SET_POKEMONS_COUNT,
-    SHOW_LOADER
+    SHOW_LOADER_LISTING
 } from "../actionTypes";
 import axios from "axios";
 
@@ -18,7 +18,7 @@ export const fetchList = (limit = 20, callBack) => {
     return async dispatch => {
 
         dispatch({
-            type: SHOW_LOADER
+            type: SHOW_LOADER_LISTING
         });
 
         dispatch({
@@ -62,7 +62,7 @@ export const fetchList = (limit = 20, callBack) => {
                             payload: listing
                         });
                         dispatch({
-                            type: HIDE_LOADER
+                            type: HIDE_LOADER_LISTING
                         });
                         dispatch(callBack.showAlert('success', "Pokemons list loaded. Have a fun :)"));
                         setTimeout(() => {
@@ -72,7 +72,7 @@ export const fetchList = (limit = 20, callBack) => {
             })
             .catch(e => {
                 dispatch({
-                    type: HIDE_LOADER
+                    type: HIDE_LOADER_LISTING
                 });
                 dispatch(callBack.showAlert('danger', "Problems with API or Internet connection"));
                 setTimeout(() => {

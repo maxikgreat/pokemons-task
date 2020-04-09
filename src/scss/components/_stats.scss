@@ -4,5 +4,12 @@
   padding: 10px;
   .stat{
     margin-bottom: 10px;
+    span{
+      font-size: 18px;
+    }
+    svg{
+      font-size: 18px;
+      margin-left: 10px;
+    }
   }
 }

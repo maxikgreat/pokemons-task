@@ -5,8 +5,11 @@ export const SHOW_ALERT = "SHOW_ALERT";
 export const HIDE_ALERT = "HIDE_ALERT";
 
 //loader types
-export const SHOW_LOADER = "SHOW_LOADER";
-export const HIDE_LOADER = "HIDE_LOADER";
+export const SHOW_LOADER_LISTING = "SHOW_LOADER_LISTING";
+export const HIDE_LOADER_LISTING = "HIDE_LOADER_LISTING";
+
+export const SHOW_LOADER_POKEMON = "SHOW_LOADER_POKEMON";
+export const HIDE_LOADER_POKEMON = "HIDE_LOADER_POKEMON";
 
 //pokemons types
 export const GET_MAX_COUNT = "GET_MAX_COUNT";
@@ -14,3 +17,7 @@ export const READY_TO_LOAD = "READY_TO_LOAD";
 export const SET_POKEMONS_COUNT = 'SET_POKEMONS_COUNT';
 export const FETCH_MAIN_LIST = "FETCH_MAIN_LIST";
 export const SET_ACTIVE_POKEMON = "SET_ACTIVE_POKEMON";
+
+//abilities types
+export const FETCH_ABILITIES_LIST = "FETCH_ABILITIES_LIST";
+export const GET_POKEMON_ABILITIES = "GET_POKEMON_ABILITIES";
