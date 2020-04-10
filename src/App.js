@@ -8,9 +8,9 @@ import {Listing} from "./pages/listing";
 import {Pokemon} from "./pages/pokemon";
 import {AbilitiesList} from "./pages/abilitiesList";
 //icons
-import {faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt} from "@fortawesome/free-solid-svg-icons";
+import {faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
-library.add(faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt);
+library.add(faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward);
 
 function App() {
 

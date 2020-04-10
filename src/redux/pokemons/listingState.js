@@ -14,7 +14,7 @@ export const setReadyToFetch = () => {
     })
 };
 
-export const fetchList = (limit = 20, callBack) => {
+export const fetchList = (limit, callBack) => {
     return async dispatch => {
 
         dispatch({

@@ -2,6 +2,7 @@ import React from 'react'
 
 export const Finder = ({finder, setFinder}) => {
 
+
   return(
       <div className="input-group mb-3">
           <div className="input-group-prepend">

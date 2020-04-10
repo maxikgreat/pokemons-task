@@ -1,15 +1,22 @@
 
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, Button, Jumbotron, Container} from 'react-bootstrap'
 import {useSelector, useDispatch} from "react-redux";
 import {Loader} from "../components/UI/Loader";
 import {fetchAbilities} from "../redux/abilities/abilitiesState";
+import {PaginationCustom} from "../components/PaginationCustom";
 
 export const AbilitiesList = () => {
 
     const ability = useSelector(state => state.ability);
     const dispatch = useDispatch();
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 20;
+    const indexOfLast = currentPage * itemsPerPage;
+    const indexOfFirst = indexOfLast - itemsPerPage;
 
     useEffect(() => {
         if(ability.listing.length === 0){
@@ -18,7 +25,10 @@ export const AbilitiesList = () => {
     },[]);
 
     const renderAbilities = () => {
-        return ability.listing.map((ability, index) => {
+
+        const currentItems = ability.listing.slice(indexOfFirst, indexOfLast);
+
+        return currentItems.map((ability, index) => {
             return(
                 <div className="skill-container" key={index} style={{}}>
                     <Card border={ability.color}>
@@ -48,6 +58,11 @@ export const AbilitiesList = () => {
                 ? <Loader/>
                 :<div className='abilities-container row'>
                         {renderAbilities()}
+                        <PaginationCustom
+                            fullList = {ability.listing}
+                            itemsPerPage = {itemsPerPage}
+                            setCurrentPage = {setCurrentPage}
+                        />
                 </div>
             }
         </section>

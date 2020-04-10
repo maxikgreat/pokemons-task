@@ -14,7 +14,7 @@ import {useDispatch} from "react-redux";
 import {fetchList} from "../redux/pokemons/listingState";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
 import {fetchAbilities} from "../redux/abilities/abilitiesState";
-
+import {PaginationCustom} from "../components/PaginationCustom";
 
 export const Listing = () => {
 
@@ -24,6 +24,7 @@ export const Listing = () => {
 
     const [finder, setFinder] = useState('');
     const [order, setOrder] = useState('default');
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         dispatch(fetchAbilities());
@@ -31,6 +32,13 @@ export const Listing = () => {
             dispatch(fetchList(listing.count, {showAlert, hideAlert}))
         }
     }, [listing.ready]);
+
+    let filtered = [];
+
+    //pagination
+    const itemsPerPage = 10;
+    const indexOfLast = currentPage * itemsPerPage;
+    const indexOfFirst = indexOfLast - itemsPerPage;
 
 
     const renderPoks = () => {
@@ -55,7 +63,7 @@ export const Listing = () => {
                 break;
         }
 
-        const filtered = sorted
+        filtered = sorted
             .filter(pok => {
                 if ((finder.substring(0, finder.length) === pok.name.substring(0, finder.length).toLowerCase())) {
                     return pok
@@ -71,7 +79,9 @@ export const Listing = () => {
             )
         }
 
-        return filtered.map((pok, index) => {
+        const currentItems = filtered.slice(indexOfFirst, indexOfLast);
+
+        return currentItems.map((pok, index) => {
             return(
                 <CardCustom
                     key = {index}
@@ -119,8 +129,19 @@ export const Listing = () => {
                 ? <Loader />
                 : <div className='listing-container row'>
                     {renderPoks()}
+                    {
+                        filtered.length !== 0 && listing.listing !== 0
+                        ? <PaginationCustom
+                                fullList = {finder ? filtered : listing.listing}
+                                itemsPerPage = {itemsPerPage}
+                                setCurrentPage = {setCurrentPage}
+                            />
+                            :null
+                    }
+
                 </div>
             }
+
         </section>
     )
 };
