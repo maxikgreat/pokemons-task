@@ -6,17 +6,22 @@ import {useSelector, useDispatch} from "react-redux";
 import {Loader} from "../components/UI/Loader";
 import {fetchAbilities} from "../redux/abilities/abilitiesState";
 import {PaginationCustom} from "../components/PaginationCustom";
+import {Finder} from "../components/Finder";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const AbilitiesList = () => {
 
     const ability = useSelector(state => state.ability);
     const dispatch = useDispatch();
 
+    const [finder, setFinder] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
     const itemsPerPage = 20;
     const indexOfLast = currentPage * itemsPerPage;
     const indexOfFirst = indexOfLast - itemsPerPage;
+
+    let filtered = [];
 
     useEffect(() => {
         if(ability.listing.length === 0){
@@ -26,7 +31,22 @@ export const AbilitiesList = () => {
 
     const renderAbilities = () => {
 
-        const currentItems = ability.listing.slice(indexOfFirst, indexOfLast);
+        filtered = ability.listing.filter(pok => {
+                if ((finder.substring(0, finder.length) === pok.name.substring(0, finder.length).toLowerCase())) {
+                    return pok
+                }
+            });
+
+        if(filtered.length <= 0){
+            return (
+                <div className='empty-container'>
+                    <h3>No matches found</h3>
+                    <FontAwesomeIcon icon={'sad-cry'} />
+                </div>
+            )
+        }
+
+        const currentItems = filtered.slice(indexOfFirst, indexOfLast);
 
         return currentItems.map((ability, index) => {
             return(
@@ -53,13 +73,20 @@ export const AbilitiesList = () => {
                     </p>
                 </Container>
             </Jumbotron>
+            <div className="options-container">
+                <Finder
+                    title="Find ability"
+                    finder={finder}
+                    setFinder={setFinder}
+                />
+            </div>
             {
                 ability.loading
                 ? <Loader/>
                 :<div className='abilities-container row'>
                         {renderAbilities()}
                         <PaginationCustom
-                            fullList = {ability.listing}
+                            fullList = {finder ? filtered : ability.listing}
                             itemsPerPage = {itemsPerPage}
                             setCurrentPage = {setCurrentPage}
                         />

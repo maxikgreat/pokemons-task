@@ -7,14 +7,6 @@ section.section-listing {
       }
     }
   }
-
-  .options-container{
-    width: 90%;
-    margin: auto;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-
   .listing-container{
     width: 90%;
     margin: auto;
@@ -22,25 +14,6 @@ section.section-listing {
     @include box-shadow(0px, 0px, 10px, 1px, rgba(0,0,0,0.75));
     margin-bottom: 100px;
     justify-content: center;
-  }
-
-  .empty-container{
-    margin: auto;
-    padding-top:30px;
-    padding-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    h3{
-      font-weight: bold;
-      color: $danger;
-    }
-    svg{
-      font-size: 40px;
-      color: $danger;
-    }
   }
 
   .order-container{

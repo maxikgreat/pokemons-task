@@ -111,6 +111,7 @@ export const Listing = () => {
             </Jumbotron>
             <div className='options-container'>
                 <Finder
+                    title = "Find pokemon"
                     finder = {finder}
                     setFinder = {setFinder}
                 />

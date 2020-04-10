@@ -1,12 +1,12 @@
 import React from 'react'
 
-export const Finder = ({finder, setFinder}) => {
+export const Finder = ({title, finder, setFinder}) => {
 
 
   return(
       <div className="input-group mb-3">
           <div className="input-group-prepend">
-              <span className="input-group-text" id="finder">Find pokemon</span>
+              <span className="input-group-text" id="finder">{title}</span>
           </div>
           <input
               type="text"
