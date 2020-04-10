@@ -1,6 +1,6 @@
 
 
-import {SET_ACTIVE_POKEMON, HIDE_LOADER_POKEMON, SHOW_LOADER_POKEMON} from "../actionTypes";
+import {SET_ACTIVE_POKEMON, HIDE_LOADER_POKEMON, SHOW_LOADER_POKEMON, GET_POKEMON_ABILITIES} from "../actionTypes";
 import axios from "axios";
 
 export const setActive = (id, callback) => {
@@ -16,6 +16,8 @@ export const setActive = (id, callback) => {
         let activePokGlobal = {};
         let activePok = {};
 
+        activePok.id = id;
+
         await axios.get(baseUrl)
             .then(response => {
                 activePokGlobal = {...response.data};
@@ -28,23 +30,13 @@ export const setActive = (id, callback) => {
                 return axios.get(activePokGlobal.species.url)
                     .then(response => {
                         activePok.species = {...response.data};
-                        let abilities = [];
-                        Promise.all(activePokGlobal.abilities.map(({ability}) => {
-                            return axios.get(ability.url)
-                                .then(response => {
-                                    return response.data
-                                })
-                                .then(data => {
-                                    abilities.push(data);
-                                })
-                        }));
-
-                        activePok.abilities = abilities;
-
                         dispatch({
                             type: SET_ACTIVE_POKEMON,
                             payload: activePok
                         });
+                        dispatch({
+                            type: HIDE_LOADER_POKEMON
+                        })
                     });
 
             })
@@ -57,15 +49,32 @@ export const setActive = (id, callback) => {
                     type: HIDE_LOADER_POKEMON
                 });
             });
-        dispatch({
-            type: HIDE_LOADER_POKEMON
-        })
     }
 };
 
-const getAbility = ({ability}) => {
-    return axios.get(ability.url)
-        .then(response => {
-            return response.data
-        })
+export const getAbilitiesById = (id) => {
+    return async dispatch => {
+
+        let baseUrl = "https://pokeapi.co/api/v2/pokemon/" + id;
+
+        await axios.get(baseUrl)
+            .then(response => {
+                return response.data.abilities.map(({ability}) => {
+                    return axios.get(ability.url)
+                        .then(response => {
+                            return response.data
+                        })
+                })
+            })
+            .then(arrayOfPromises => {
+                Promise.all(arrayOfPromises)
+                    .then(data => {
+                        dispatch({
+                            type: GET_POKEMON_ABILITIES,
+                            payload: data
+                        })
+                    });
+            })
+    }
+
 };

@@ -8,6 +8,7 @@ import {fetchAbilities} from "../redux/abilities/abilitiesState";
 import {PaginationCustom} from "../components/PaginationCustom";
 import {Finder} from "../components/Finder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 export const AbilitiesList = () => {
 
@@ -67,10 +68,13 @@ export const AbilitiesList = () => {
         <section className='section-abilities'>
             <Jumbotron fluid>
                 <Container>
-                    <h1>Full list of abilities</h1>
+                    <h1>Full list of <span className = 'special-text'>abilities</span></h1>
                     <p>
                         You can <span className = 'special-text'>click</span> on anyone, to see more
                     </p>
+                    <Link to='/'>
+                        <button className='btn btn-success'>Pokemons</button>
+                    </Link>
                 </Container>
             </Jumbotron>
             <div className="options-container">
@@ -88,7 +92,7 @@ export const AbilitiesList = () => {
                         <PaginationCustom
                             fullList = {finder ? filtered : ability.listing}
                             itemsPerPage = {itemsPerPage}
-                            setCurrentPage = {setCurrentPage}
+                            setGlobalPages = {setCurrentPage}
                         />
                 </div>
             }

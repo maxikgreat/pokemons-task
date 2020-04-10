@@ -39,6 +39,7 @@ section{
 .special-text{
   font-weight: bold;
   color: $danger;
+  text-transform: uppercase;
 }
 
 .empty-container{
@@ -59,6 +60,7 @@ section{
     color: $danger;
   }
 }
+
 
 @import 'respo.scss';
 

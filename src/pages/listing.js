@@ -1,5 +1,6 @@
 
 import React, {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import {Loader} from "../components/UI/Loader";
 import {CardCustom} from "../components/CardCustom";
 import {Jumbotron, Container} from "react-bootstrap";
@@ -63,12 +64,14 @@ export const Listing = () => {
                 break;
         }
 
+
         filtered = sorted
             .filter(pok => {
                 if ((finder.substring(0, finder.length) === pok.name.substring(0, finder.length).toLowerCase())) {
                     return pok
                 }
             });
+
 
         if(filtered.length <= 0){
             return (
@@ -107,7 +110,12 @@ export const Listing = () => {
                     <p>
                         Application was created special for <span className = 'special-text'>Summer e-Xperience 2020</span>
                     </p>
+                    <Link to = '/abilities'>
+                        <button className='btn btn-success toggleToPage'>Abilities</button>
+                    </Link>
+
                 </Container>
+
             </Jumbotron>
             <div className='options-container'>
                 <Finder
@@ -133,9 +141,9 @@ export const Listing = () => {
                     {
                         filtered.length !== 0 && listing.listing !== 0
                         ? <PaginationCustom
-                                fullList = {finder ? filtered : listing.listing}
+                                fullList = {finder !== '' ? filtered : listing.listing}
                                 itemsPerPage = {itemsPerPage}
-                                setCurrentPage = {setCurrentPage}
+                                setGlobalPages = {setCurrentPage}
                             />
                             :null
                     }

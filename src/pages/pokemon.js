@@ -9,6 +9,7 @@ import {showAlert, hideAlert} from "../redux/alert/alertState";
 import {setActive} from '../redux/pokemons/activeState'
 import {Stats} from "../components/Stats";
 import {formStats} from "../helpFunctions/formStats";
+import {AbilitiesInPok} from "../components/AbilitiesInPok";
 
 export const Pokemon = () => {
 
@@ -28,7 +29,6 @@ export const Pokemon = () => {
                ? <Loader/>
                : <>
                    <div className='row d-flex align-items-center'>
-                       {console.log(pokemon.activePokemon)}
                        <div className='col-md-5 col-12'>
                            <Gallery
                                sprites = {pokemon.activePokemon.sprites}
@@ -41,7 +41,14 @@ export const Pokemon = () => {
                        </div>
                    </div>
                    <div className='row'>
-                       <h1>Abilities</h1>
+                       <div className='col-4'>
+                           <AbilitiesInPok
+                               pokId={pokemon.activePokemon.id}
+                           />
+                       </div>
+                       <div className='col-8'>
+
+                       </div>
                    </div>
                    </>
            }

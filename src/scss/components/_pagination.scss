@@ -39,12 +39,12 @@ ul.pagination {
     }
   }
   li{
-    padding: 10px;
     margin-left: 2px;
     margin-right: 2px;
     border: 1px solid $success;
     cursor: pointer;
     a{
+      padding: 10px;
       font-weight: bold;
     }
     &.active{
