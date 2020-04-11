@@ -11,14 +11,11 @@ import {Stats} from "../components/Stats";
 import {formStats} from "../helpFunctions/formStats";
 import {AbilitiesInPok} from "../components/AbilitiesInPok";
 import {formSkills} from "../helpFunctions/formSkills";
-import {AlertCustom} from "../components/AlertCustom";
 import {ErrorPage} from "../components/ErrorPage";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {AddInfo} from "../components/addInfo";
 
 export const Pokemon = () => {
 
-    const alert = useSelector(state => state.alert);
     const abilities = useSelector(state => state.ability);
     const pokemon = useSelector(state => state.pokemon);
     const dispatch = useDispatch();
@@ -31,10 +28,7 @@ export const Pokemon = () => {
 
     if(pokemon.error){
         return(
-            <>
-                <AlertCustom alert = {alert}/>
-                <ErrorPage message = {pokemon.error} />
-            </>
+            <ErrorPage message = {pokemon.error} />
         )
     }
 

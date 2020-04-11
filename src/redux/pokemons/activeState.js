@@ -42,7 +42,7 @@ export const setActive = (id, callback) => {
                             type: SET_ACTIVE_POKEMON,
                             payload: {id, name, base_exp, sprites, stats, species}
                         });
-                        dispatch(getAbilitiesById(id));
+                        dispatch(getAbilitiesOfPokemonById(id));
                         dispatch({
                             type: HIDE_LOADER_POKEMON
                         })
@@ -65,7 +65,7 @@ export const setActive = (id, callback) => {
     }
 };
 
-export const getAbilitiesById = (id) => {
+export const getAbilitiesOfPokemonById = (id) => {
     return async dispatch => {
 
         let baseUrl = "https://pokeapi.co/api/v2/pokemon/" + id;
