@@ -2,6 +2,15 @@
 
 @include media-breakpoint-down(sm){
 
+  section.error-container{
+    h2{
+      font-size: 30px;
+    }
+    h3{
+      font-size: 20px;
+    }
+  }
+
   section.section-listing{
     .card-container {
       .card-title{

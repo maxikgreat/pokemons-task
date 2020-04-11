@@ -87,6 +87,8 @@
 
 
 .gallery-container{
+  border: 3px solid $success;
+  background-image: url('../../../src/assets/images/gallery_background.png');
   //height: 500px;
   .carousel{
     //height: 100%;

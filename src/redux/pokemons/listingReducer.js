@@ -11,7 +11,7 @@ import {
 const initialState = {
     ready: false,
     maxCount: null,
-    count: 300, // default
+    count: 20, // default
     loading: true,
     listing: []
 };

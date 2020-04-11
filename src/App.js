@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 //styles
 import './scss/styles.scss'
 //router
@@ -8,11 +8,19 @@ import {Listing} from "./pages/listing";
 import {Pokemon} from "./pages/pokemon";
 import {AbilitiesList} from "./pages/abilitiesList";
 //icons
-import {faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward} from "@fortawesome/free-solid-svg-icons";
+import {faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward, faBabyCarriage, faStarHalfAlt, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
-library.add(faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward);
+import {useDispatch} from "react-redux";
+import {fetchAbilities} from "./redux/abilities/abilitiesState";
+library.add(faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward, faBabyCarriage, faStarHalfAlt, faMapPin);
 
 function App() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchAbilities());
+    }, []);
 
     return(
         <main>

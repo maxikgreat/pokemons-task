@@ -1,11 +1,22 @@
 
 
-import {SET_ACTIVE_POKEMON, HIDE_LOADER_POKEMON, SHOW_LOADER_POKEMON, GET_POKEMON_ABILITIES} from "../actionTypes";
+import {
+    SET_ACTIVE_POKEMON,
+    HIDE_LOADER_POKEMON,
+    SHOW_LOADER_POKEMON,
+    GET_POKEMON_ABILITIES,
+    SET_POKEMON_ERROR,
+    CLEAR_POKEMON_ERROR
+} from "../actionTypes";
 import axios from "axios";
 
 export const setActive = (id, callback) => {
 
     return async dispatch => {
+
+        dispatch({
+            type: CLEAR_POKEMON_ERROR
+        });
 
         dispatch({
             type: SHOW_LOADER_POKEMON
@@ -14,26 +25,24 @@ export const setActive = (id, callback) => {
         let baseUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
         let activePokGlobal = {};
-        let activePok = {};
-
-        activePok.id = id;
 
         await axios.get(baseUrl)
             .then(response => {
                 activePokGlobal = {...response.data};
 
-                activePok.name = activePokGlobal.name;
-                activePok.base_exp = activePokGlobal.base_experience;
-                activePok.sprites = activePokGlobal.sprites;
-                activePok.stats = activePokGlobal.stats;
+                let name = activePokGlobal.name;
+                let base_exp = activePokGlobal.base_experience;
+                let sprites = activePokGlobal.sprites;
+                let stats = activePokGlobal.stats;
 
                 return axios.get(activePokGlobal.species.url)
                     .then(response => {
-                        activePok.species = {...response.data};
+                        let species = {...response.data};
                         dispatch({
                             type: SET_ACTIVE_POKEMON,
-                            payload: activePok
+                            payload: {id, name, base_exp, sprites, stats, species}
                         });
+                        dispatch(getAbilitiesById(id));
                         dispatch({
                             type: HIDE_LOADER_POKEMON
                         })
@@ -41,6 +50,10 @@ export const setActive = (id, callback) => {
 
             })
             .catch(e => {
+                dispatch({
+                    type: SET_POKEMON_ERROR,
+                    payload: 'Maybe pokemon you try to find not exist'
+                });
                 dispatch(callback.showAlert('danger', `Error! ${e.message}`));
                 setTimeout(() => {
                     dispatch(callback.hideAlert());
@@ -72,7 +85,8 @@ export const getAbilitiesById = (id) => {
                         dispatch({
                             type: GET_POKEMON_ABILITIES,
                             payload: data
-                        })
+                        });
+
                     });
             })
     }

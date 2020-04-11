@@ -1,29 +1,23 @@
 
 
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {getAbilitiesById} from "../redux/pokemons/activeState";
+import React from 'react'
 
-export const AbilitiesInPok = ({pokId}) => {
+export const AbilitiesInPok = ({skills}) => {
 
-    const abilities = useSelector(state => state.ability);
-    const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-        console.log(pokId);
-
-        //const skillsId = skills.map(skill => skill.id);
-        // console.log(skills);
-        // console.log(skillsId);
-
-        dispatch(getAbilitiesById(pokId));
-    }, []);
+    const renderSkills = () => {
+        return skills.map((skill, index) => {
+            return (
+                <div key={index} className={'bg-'+skill.color + ' skill'}>
+                    <img src = {skill.img} alt = "Skill"/>
+                    <span>{skill.name.replace("-", " ").toUpperCase()}</span>
+                </div>
+            )
+        })
+    };
 
     return(
         <div className='skills-container'>
-            {/*{renderAbilities()}*/}
+            {renderSkills()}
         </div>
     )
 
