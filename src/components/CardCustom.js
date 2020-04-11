@@ -1,7 +1,7 @@
 
 
 import React, {useState} from 'react'
-import {Card, Button, ProgressBar, Badge} from 'react-bootstrap'
+import {Card, Button, ProgressBar, Badge, Popover, OverlayTrigger} from 'react-bootstrap'
 import {PopupGallery} from "./PopupGallery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
@@ -50,9 +50,20 @@ export const CardCustom = ({name, id, abilities, base_exp, sprites, types}) => {
                     <Card.Body>
                         <Card.Title>
                             {name.toUpperCase()}
-                            <div className="abilities-container" title="Abilities">
-                                <FontAwesomeIcon icon={'meteor'} /> x {abilities.length}
-                            </div>
+                            <OverlayTrigger
+                                trigger={['hover', 'focus']}
+                                placement='top'
+                                overlay={
+                                    <Popover id={`popover-positioned-top`}>
+                                        <Popover.Title as="h3">Skills</Popover.Title>
+                                    </Popover>
+                                }
+                            >
+                                <div className="abilities-container" title="Abilities">
+                                    <FontAwesomeIcon icon={'meteor'} /> x {abilities.length}
+                                </div>
+                            </OverlayTrigger>
+
                         </Card.Title>
                         {renderTypes()}
                         <ProgressBar

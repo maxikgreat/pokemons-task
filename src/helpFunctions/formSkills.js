@@ -11,7 +11,7 @@ export const formSkills = (skills, listing) => {
             ability.id = skill.id;
             ability.name = skill.name;
             ability.isMainSeries = skill.is_main_series;
-            ability.desc = skill.effect_entries[0].effect;
+            ability.desc = skill.effect_entries[0].short_effect;
 
             let finded = listing.find((item) => item.id === skill.id);
 

@@ -4,26 +4,29 @@ section.section-pokemon {
   margin:50px;
 
   .name {
-    background-color: lighten($success, 20%);
+    background-color: lighten($success, 40%);
     padding: 5px 10px 5px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     h2{
       font-weight: bold;
+      font-size: 35px;
+      margin: 0;
     }
     .add-info {
       display: flex;
       align-items: center;
       div{
+        cursor: pointer;
         margin-left: 10px;
         margin-right: 10px;
       }
       span{
-        font-size: 20px;
+        font-size: 18px;
       }
       svg{
-        font-size: 30px;
+        font-size: 25px;
       }
     }
   }
@@ -33,8 +36,9 @@ section.section-pokemon {
     flex-direction: row;
     justify-content: space-evenly;
     .skill {
+      cursor: pointer;
       border: 2px solid black;
-      min-width: 100px;
+      width: 100px;
       text-align: center;
       padding: 5px;
       display: flex;
@@ -43,10 +47,10 @@ section.section-pokemon {
       justify-content: space-between;
       span{
         font-weight: bold;
+        font-size: 13px;
       }
       img{
-        max-width: 100px;
-        max-height: 100px;
+        width: 100%;
       }
     }
   }

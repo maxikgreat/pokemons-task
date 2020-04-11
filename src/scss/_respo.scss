@@ -1,4 +1,29 @@
 
+@include media-breakpoint-down(md){
+  section.section-pokemon {
+    .name{
+      h2{
+        font-size: 20px;
+      }
+      .add-info {
+        span{
+          font-size: 16px;
+        }
+        svg{
+          font-size: 22px;
+        }
+      }
+    }
+    .skills-container {
+      .skill {
+        width: 100px;
+        span{
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
 
 @include media-breakpoint-down(sm){
 
@@ -30,10 +55,6 @@
     }
   }
 
-  section.section-pokemon{
-    margin: 10px;
-  }
-
   section.section-abilities{
     .abilities-container{
       margin: 10px;
@@ -58,10 +79,21 @@
     }
   }
 
+  section.section-pokemon{
+    .skills-container {
+      .skill {
+        width: 33%;
+        max-width: 120px;
+        span{
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
 }
 // mobile screens
 @include media-breakpoint-down(xs) {
-  .gallery-container {
     img.photo{
       width: 30ch;
       height: 30ch;
@@ -76,7 +108,6 @@
       right: 20%;
       top: 60%;
     }
-  }
   .card-container{
     .card-title{
       font-size: 25px;
@@ -116,6 +147,29 @@
           &.active {
             background-color: $success;
           }
+        }
+      }
+    }
+  }
+  section.section-pokemon{
+    margin: 10px;
+    .name{
+      h2{
+        font-size: 22px;
+      }
+      .add-info {
+        span{
+          font-size: 16px;
+        }
+        svg{
+          font-size: 22px;
+        }
+      }
+    }
+    .skills-container {
+      .skill {
+        span{
+          font-size: 10px;
         }
       }
     }

@@ -14,6 +14,7 @@ import {formSkills} from "../helpFunctions/formSkills";
 import {AlertCustom} from "../components/AlertCustom";
 import {ErrorPage} from "../components/ErrorPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {AddInfo} from "../components/addInfo";
 
 export const Pokemon = () => {
 
@@ -50,25 +51,11 @@ export const Pokemon = () => {
                            />
                            <div className={'name'}>
                                <h2>{pokemon.name.toUpperCase()}</h2>
-                               <div className='add-info'>
-                                   <div className='add-info--gender-rate'>
-                                       <FontAwesomeIcon icon='star-half-alt' />
-                                       <span>{pokemon.species.gender_rate}</span>
-                                   </div>
-                                   <div className='add-info--capture-rate'>
-                                       <FontAwesomeIcon icon='map-pin' />
-                                       <span>{pokemon.species.capture_rate}</span>
-                                   </div>
-                                   {
-                                       pokemon.species.is_baby
-                                       ? <div className='add-info--is-baby'>
-                                               <FontAwesomeIcon icon ='baby-carriage' />
-                                           </div>
-                                           : null
-                                   }
-
-                               </div>
-
+                               <AddInfo
+                                   genderRate = {pokemon.species.gender_rate}
+                                   captureRate = {pokemon.species.capture_rate}
+                                   isBaby = {pokemon.species.is_baby}
+                               />
                            </div>
 
                        </div>
