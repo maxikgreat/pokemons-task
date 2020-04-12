@@ -1,11 +1,12 @@
 import axios from 'axios'
 import {
     FETCH_ABILITIES_LIST,
-    SHOW_LOADER_ABILITIES,
+    HIDE_LOADER_ABILITY,
     HIDE_LOADER_ABILITIES,
     CLEAR_ABILITY_ERROR,
     SET_ACTIVE_ABILITY,
-    SET_POKEMON_ERROR, HIDE_LOADER_POKEMON, SET_ABILITY_ERROR
+    SET_ABILITY_ERROR,
+    GET_POKS_WITH_ABILITY
 } from "../actionTypes";
 
 //add custom icons to abilities and colors
@@ -13,10 +14,6 @@ const iconsSrc = require.context('../../assets/images/skills/', false, /\.(svg)$
 
 export const fetchAbilities = () => {
     return async dispatch => {
-
-        dispatch({
-            type: SHOW_LOADER_ABILITIES
-        });
 
         const skillsIconsSrc = [];
         iconsSrc.keys().map(iconsSrc).forEach(item => {
@@ -46,6 +43,12 @@ export const fetchAbilities = () => {
                         })
                     })
             })
+            .catch(e => {
+                dispatch({
+                    type: SET_ABILITY_ERROR,
+                    payload: 'Problems fetching listing of abilities'
+                });
+            })
     }
 };
 
@@ -57,21 +60,37 @@ export const getAbilityById = (id, callback) => {
             type:CLEAR_ABILITY_ERROR
         });
 
-        dispatch({
-            type:SHOW_LOADER_ABILITIES
-        });
 
         let baseUrl = "https://pokeapi.co/api/v2/ability/" + id;
 
         await axios.get(baseUrl)
             .then((response) => {
+                let globalData = response.data
                 dispatch({
                     type: SET_ACTIVE_ABILITY,
                     payload: response.data
                 });
-                dispatch({
-                    type: HIDE_LOADER_ABILITIES
+                const arrayOfPromises = response.data.pokemon.map(pok => {
+                    return axios.get(pok.pokemon.url)
+                        .then(response => response)
                 });
+                Promise.all(arrayOfPromises)
+                    .then(res => {
+                        let poksWithAbilities = [];
+                        res.forEach(res => {
+                            poksWithAbilities.push(res.data);
+                        });
+                        dispatch({
+                            type: GET_POKS_WITH_ABILITY,
+                            payload: poksWithAbilities
+                        });
+                        dispatch({
+                            type: HIDE_LOADER_ABILITY
+                        })
+                    });
+
+
+
             })
             .catch(e => {
                 dispatch({
@@ -82,11 +101,9 @@ export const getAbilityById = (id, callback) => {
                 setTimeout(() => {
                     dispatch(callback.hideAlert());
                 }, 3000);
-                dispatch({
-                    type: HIDE_LOADER_ABILITIES
-                });
             });
     }
 };
+
 
 

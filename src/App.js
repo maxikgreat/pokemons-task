@@ -11,17 +11,23 @@ import {Ability} from "./pages/ability";
 //icons
 import {faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward, faBabyCarriage, faStarHalfAlt, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchAbilities} from "./redux/abilities/abilitiesState";
+import {fetchList} from "./redux/pokemons/listingState";
+import {hideAlert, showAlert} from "./redux/alert/alertState";
 library.add(faTimesCircle, faMeteor, faSadCry, faStar, faSmile, faHeartbeat, faWind, faFireAlt, faShieldAlt, faBackward, faForward, faBabyCarriage, faStarHalfAlt, faMapPin);
 
 function App() {
 
     const dispatch = useDispatch();
+    const listing = useSelector(state => state.listing);
 
     useEffect(() => {
-        dispatch(fetchAbilities());
-    }, []);
+        if(listing.ready){
+            dispatch(fetchAbilities());
+            dispatch(fetchList(listing.count, {showAlert, hideAlert}))
+        }
+    }, [listing.ready]);
 
     return(
         <main>

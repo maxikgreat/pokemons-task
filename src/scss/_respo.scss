@@ -91,6 +91,10 @@
     }
   }
 
+  section.section-ability-one{
+    margin: 10px;
+  }
+
 }
 // mobile screens
 @include media-breakpoint-down(xs) {

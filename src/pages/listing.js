@@ -27,13 +27,6 @@ export const Listing = () => {
     const [order, setOrder] = useState('default');
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        dispatch(fetchAbilities());
-        if(listing.ready){
-            dispatch(fetchList(listing.count, {showAlert, hideAlert}))
-        }
-    }, [listing.ready]);
-
     let filtered = [];
 
     //pagination
