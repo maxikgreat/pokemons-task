@@ -65,8 +65,8 @@ export const Ability = () => {
                 ability.loading || ability.loadingAbility
                 ? <Loader /> :
                     <>
-                        <div className='row border-bottom border-success mb-3'>
-                            <div className='col-md-5 col-12'>
+                        <div className='row border-bottom border-success mb-3 p-3'>
+                            <div className='col-md-5 col-12 d-flex align-items-center'>
                                 {findImage()}
                             </div>
                             <div className='col-md-7 col-12 d-flex align-items-center'>

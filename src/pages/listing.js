@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react'
+import React, {useState, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import {Loader} from "../components/UI/Loader";
 import {CardCustom} from "../components/CardCustom";
@@ -14,7 +14,6 @@ import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {fetchList} from "../redux/pokemons/listingState";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
-import {fetchAbilities} from "../redux/abilities/abilitiesState";
 import {PaginationCustom} from "../components/PaginationCustom";
 
 export const Listing = () => {
@@ -22,6 +21,8 @@ export const Listing = () => {
     const alert = useSelector(state => state.alert);
     const listing = useSelector(state => state.listing);
     const dispatch = useDispatch();
+
+    const _listingContainer = useRef();
 
     const [finder, setFinder] = useState('');
     const [order, setOrder] = useState('default');
@@ -60,7 +61,7 @@ export const Listing = () => {
 
         filtered = sorted
             .filter(pok => {
-                if ((finder.substring(0, finder.length) === pok.name.substring(0, finder.length).toLowerCase())) {
+                if ((finder.substring(0, finder.length).toLowerCase() === pok.name.substring(0, finder.length).toLowerCase())) {
                     return pok
                 }
             });
@@ -129,7 +130,7 @@ export const Listing = () => {
             </div>
             { listing.loading
                 ? <Loader />
-                : <div className='listing-container row'>
+                : <div className='listing-container row' ref={_listingContainer}>
                     {renderPoks()}
                     {
                         filtered.length !== 0 && listing.listing !== 0
@@ -137,6 +138,7 @@ export const Listing = () => {
                                 fullList = {finder !== '' ? filtered : listing.listing}
                                 itemsPerPage = {itemsPerPage}
                                 setGlobalPages = {setCurrentPage}
+                                container = {_listingContainer.current}
                             />
                             :null
                     }

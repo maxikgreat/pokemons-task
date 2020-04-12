@@ -6,7 +6,7 @@ import {
     CLEAR_ABILITY_ERROR,
     SET_ACTIVE_ABILITY,
     SET_ABILITY_ERROR,
-    GET_POKS_WITH_ABILITY
+    GET_POKS_WITH_ABILITY, SHOW_LOADER_ABILITY
 } from "../actionTypes";
 
 //add custom icons to abilities and colors
@@ -58,6 +58,10 @@ export const getAbilityById = (id, callback) => {
 
         dispatch({
             type:CLEAR_ABILITY_ERROR
+        });
+
+        dispatch({
+            type: SHOW_LOADER_ABILITY
         });
 
 

@@ -4,6 +4,7 @@ import './scss/styles.scss'
 //router
 import {Route, Switch, Redirect} from 'react-router-dom'
 //components
+import {NavbarCustom} from "./components/UI/NavbarCustom";
 import {Listing} from "./pages/listing";
 import {Pokemon} from "./pages/pokemon";
 import {AbilitiesList} from "./pages/abilitiesList";
@@ -30,15 +31,20 @@ function App() {
     }, [listing.ready]);
 
     return(
-        <main>
-            <Switch>
-                <Route path={'/'} exact component={Listing}/>
-                <Route path={'/pokemon/:id'} component={Pokemon} />
-                <Route path={'/abilities'} component={AbilitiesList} />
-                <Route path={'/ability/:id'} component={Ability} />
-                <Redirect to={'/'}/>
-            </Switch>
-        </main>
+        <>
+            <header>
+                <NavbarCustom />
+            </header>
+            <main>
+                <Switch>
+                    <Route path={'/'} exact component={Listing}/>
+                    <Route path={'/pokemon/:id'} component={Pokemon} />
+                    <Route path={'/abilities'} component={AbilitiesList} />
+                    <Route path={'/ability/:id'} component={Ability} />
+                    <Redirect to={'/'}/>
+                </Switch>
+            </main>
+        </>
     )
 }
 

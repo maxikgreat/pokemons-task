@@ -4,13 +4,11 @@ import React, {useEffect} from 'react';
 import ReactPaginate from 'react-paginate'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const PaginationCustom = ({fullList, itemsPerPage, setGlobalPages}) => {
+export const PaginationCustom = ({fullList, itemsPerPage, setGlobalPages, container}) => {
 
 
     useEffect(() => {
-
         //TODO FIX PAGES
-
     }, []);
 
     const back = <FontAwesomeIcon icon={'backward'}/>;
@@ -23,6 +21,9 @@ export const PaginationCustom = ({fullList, itemsPerPage, setGlobalPages}) => {
     }
 
     const updatePages = (page) => {
+        if(container){
+            container.scrollIntoView({behavior: "smooth"});
+        }
         setGlobalPages(page + 1);
     };
 

@@ -139,12 +139,13 @@
         }
         li {
           padding: 5px;
-          margin-left: 2px;
-          margin-right: 2px;
+          margin-left: 0;
+          margin-right: 0;
           border: 1px solid $success;
           cursor: pointer;
           a {
-            font-size: 14px;
+            padding: 0;
+            font-size: 12px;
             font-weight: bold;
           }
 
@@ -175,6 +176,22 @@
         span{
           font-size: 10px;
         }
+      }
+    }
+  }
+  section.section-ability-one{
+    .desc-container{
+      h1{
+        font-size: 30px;
+        font-weight: bold;
+      }
+      p{
+        font-size: 16px;
+      }
+    }
+    .also-have-container{
+      h2{
+        font-size: 25px;
       }
     }
   }

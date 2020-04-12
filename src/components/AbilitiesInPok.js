@@ -2,6 +2,7 @@
 
 import React from 'react'
 import {OverlayTrigger, Popover} from "react-bootstrap";
+import {Link} from 'react-router-dom';
 
 export const AbilitiesInPok = ({skills}) => {
 
@@ -17,7 +18,7 @@ export const AbilitiesInPok = ({skills}) => {
                         <Popover id={`popover-positioned-top`}>
                             <Popover.Title as="h3">{skill.desc}</Popover.Title>
                             <Popover.Content>
-                                <button className='btn btn-success'>More</button>
+                                <Link to={`/ability/${skill.id}`} className='btn btn-success'>More</Link>
                             </Popover.Content>
                         </Popover>
                     }
