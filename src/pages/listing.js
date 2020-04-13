@@ -7,8 +7,8 @@ import {Jumbotron, Container} from "react-bootstrap";
 import {AlertCustom} from "../components/AlertCustom";
 import {Finder} from "../components/Finder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {ListLoader} from "../components/ListLoader";
-import {OrderOptions} from "../components/OrderOptions";
+import {ListLoader} from "../components/pokemon/ListLoader";
+import {OrderOptions} from "../components/pokemon/OrderOptions";
 //redux
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";

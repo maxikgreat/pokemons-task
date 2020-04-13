@@ -27,7 +27,6 @@ export const fetchAbilities = () => {
             .then(response => {
 
                 const maxCount = response.data.count;
-                console.log(maxCount);
                 return axios.get(baseUrl + '?limit=' + maxCount)
                     .then(response => {
                         const abilities = response.data.results;
@@ -71,7 +70,6 @@ export const getAbilityById = (id, callback) => {
 
         await axios.get(baseUrl)
             .then((response) => {
-                let globalData = response.data
                 dispatch({
                     type: SET_ACTIVE_ABILITY,
                     payload: response.data
@@ -94,8 +92,6 @@ export const getAbilityById = (id, callback) => {
                             type: HIDE_LOADER_ABILITY
                         })
                     });
-
-
 
             })
             .catch(e => {

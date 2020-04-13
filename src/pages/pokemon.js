@@ -7,13 +7,13 @@ import {Loader} from "../components/UI/Loader";
 import {useSelector, useDispatch} from "react-redux";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
 import {setActive} from '../redux/pokemons/activeState'
-import {Stats} from "../components/Stats";
+import {Stats} from "../components/pokemon/Stats";
 import {formStats} from "../helpFunctions/formStats";
-import {AbilitiesInPok} from "../components/AbilitiesInPok";
+import {AbilitiesInPok} from "../components/pokemon/AbilitiesInPok";
 import {formSkills} from "../helpFunctions/formSkills";
 import {ErrorPage} from "../components/ErrorPage";
-import {AddInfo} from "../components/addInfo";
-import {EvolutionChain} from "../components/EvolutionChain";
+import {AddInfo} from "../components/pokemon/addInfo";
+import {EvolutionChain} from "../components/pokemon/EvolutionChain";
 
 export const Pokemon = () => {
 
