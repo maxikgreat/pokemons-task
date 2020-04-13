@@ -5,7 +5,8 @@ import {
     SET_ACTIVE_POKEMON,
     SET_POKEMON_ERROR,
     SHOW_LOADER_POKEMON,
-    CLEAR_POKEMON_ERROR
+    CLEAR_POKEMON_ERROR,
+    GET_EVOLUTION_CHAIN
 } from "../actionTypes";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     sprites: null,
     stats: [],
     species: {},
-    abilities: []
+    abilities: [],
+    evolutionChain: []
 };
 
 export const activeReducer = (state = initialState, {type, payload}) => {
@@ -56,6 +58,11 @@ export const activeReducer = (state = initialState, {type, payload}) => {
             return{
                 ...state,
                 abilities: payload
+            };
+        case GET_EVOLUTION_CHAIN:
+            return{
+                ...state,
+                evolutionChain: payload
             };
         default:
             return state

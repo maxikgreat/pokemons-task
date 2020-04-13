@@ -13,6 +13,7 @@ import {AbilitiesInPok} from "../components/AbilitiesInPok";
 import {formSkills} from "../helpFunctions/formSkills";
 import {ErrorPage} from "../components/ErrorPage";
 import {AddInfo} from "../components/addInfo";
+import {EvolutionChain} from "../components/EvolutionChain";
 
 export const Pokemon = () => {
 
@@ -59,14 +60,16 @@ export const Pokemon = () => {
                            />
                        </div>
                    </div>
-                   <div className='row'>
-                       <div className='col-md-5 col-12'>
+                   <div className='row d-flex align-items-center'>
+                       <div className='col-md-5 col-12 mb-sm-0 mb-5'>
                            <AbilitiesInPok
                                skills = {formSkills(pokemon.abilities, abilities.listing)}
                            />
                        </div>
                        <div className='col-md-7 col-12'>
-
+                            <EvolutionChain
+                                evolutionChain = {pokemon.evolutionChain}
+                            />
                        </div>
                    </div>
                    </>

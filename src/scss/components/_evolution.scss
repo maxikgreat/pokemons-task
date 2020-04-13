@@ -1,0 +1,33 @@
+
+.evolution-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  h3{
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .evol{
+    @include transition(all .2s ease);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    span{
+      font-weight: bold;
+      color: $primary;
+    }
+    img{
+      width: 100%;
+    }
+    &:hover{
+      transform: scale(1.02);
+      background-color: $success;
+    }
+  }
+  svg{
+    font-size: 25px;
+  }
+}

@@ -23,9 +23,24 @@
       }
     }
   }
+  .evolution-container{
+    h3{
+      font-size: 20px;
+      margin-right: 10px !important;
+    }
+    svg{
+      font-size: 20px;
+    }
+  }
 }
 
 @include media-breakpoint-down(sm){
+
+  .evolution-container{
+    h3{
+      display: none;
+    }
+  }
 
   section.error-container{
     h2{
@@ -48,10 +63,10 @@
         height: 30px;
       }
     }
-    .pagination-container{
-      ul.pagination{
-        width: 80%;
-      }
+  }
+  .pagination-container{
+    ul.pagination{
+      width: 80%;
     }
   }
 
@@ -118,40 +133,38 @@
     }
   }
 
-  section.section-listing{
-    .pagination-container{
-      ul.pagination{
-        width: 100%;
-        .previous{
-          border: none;
-          svg{
-            font-size: 18px;
-          }
+  .pagination-container{
+    ul.pagination{
+      width: 100%;
+      .previous{
+        border: none;
+        svg{
+          font-size: 18px;
         }
-        .next{
-          border: none;
-          svg{
-            font-size: 18px;
-          }
+      }
+      .next{
+        border: none;
+        svg{
+          font-size: 18px;
         }
-        .break{
-          border: none;
+      }
+      .break{
+        border: none;
+      }
+      li {
+        padding: 5px;
+        margin-left: 0;
+        margin-right: 0;
+        border: 1px solid $success;
+        cursor: pointer;
+        a {
+          padding: 0;
+          font-size: 12px;
+          font-weight: bold;
         }
-        li {
-          padding: 5px;
-          margin-left: 0;
-          margin-right: 0;
-          border: 1px solid $success;
-          cursor: pointer;
-          a {
-            padding: 0;
-            font-size: 12px;
-            font-weight: bold;
-          }
 
-          &.active {
-            background-color: $success;
-          }
+        &.active {
+          background-color: $success;
         }
       }
     }

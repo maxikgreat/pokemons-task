@@ -19,6 +19,7 @@ export const Stats = ({stats}) => {
 
   return(
       <div className='stats-container'>
+          <h3>Stats</h3>
           {renderStats()}
       </div>
   )

@@ -6,7 +6,8 @@ import {
     SHOW_LOADER_POKEMON,
     GET_POKEMON_ABILITIES,
     SET_POKEMON_ERROR,
-    CLEAR_POKEMON_ERROR
+    CLEAR_POKEMON_ERROR,
+    GET_EVOLUTION_CHAIN
 } from "../actionTypes";
 import axios from "axios";
 
@@ -22,11 +23,11 @@ export const setActive = (id, callback) => {
             type: SHOW_LOADER_POKEMON
         });
 
-        let baseUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+        let baseUrl = `https://pokeapi.co/api/v2/pokemon/`;
 
         let activePokGlobal = {};
 
-        await axios.get(baseUrl)
+        await axios.get(baseUrl + id)
             .then(response => {
                 activePokGlobal = {...response.data};
 
@@ -43,9 +44,40 @@ export const setActive = (id, callback) => {
                             payload: {id, name, base_exp, sprites, stats, species}
                         });
                         dispatch(getAbilitiesOfPokemonById(id));
-                        dispatch({
-                            type: HIDE_LOADER_POKEMON
-                        })
+                        return axios.get(species.evolution_chain.url)
+                            .then((response) => {
+                                let chainArr = getEvolution(response.data.chain);
+                                let pokId = chainArr.map(item => {
+                                   return item.url.match((/\/+[0-9]+\//g))[0].replace(/\//g, '')
+                                });
+                                return pokId.map(id => {
+                                   return axios.get(baseUrl + id)
+                                       .then(res => {
+                                           return res.data
+                                       })
+                                });
+                            })
+                            .then(arrayOfPromises => {
+                                Promise.all(arrayOfPromises)
+                                    .then(data => {
+                                        let chainArr = [];
+                                        data.forEach(pok => {
+                                            chainArr.push({
+                                                id: pok.id,
+                                                name: pok.name,
+                                                sprite: pok.sprites.front_default
+                                            })
+                                        });
+                                        dispatch({
+                                            type: GET_EVOLUTION_CHAIN,
+                                            payload: chainArr
+                                        });
+                                        dispatch({
+                                            type: HIDE_LOADER_POKEMON
+                                        });
+                                    })
+                            })
+
                     });
 
             })
@@ -91,4 +123,13 @@ export const getAbilitiesOfPokemonById = (id) => {
             })
     }
 
+};
+
+export const getEvolution = (chain, chainArr = []) => {
+    chainArr.push(chain.species);
+    if(chain.evolves_to.length > 0){
+        return getEvolution(chain.evolves_to[0], chainArr);
+    } else {
+        return chainArr;
+    }
 };
