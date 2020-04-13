@@ -7,6 +7,7 @@ import {getAbilityById} from "../redux/abilities/abilitiesState";
 import {showAlert, hideAlert} from "../redux/alert/alertState";
 import {ErrorPage} from "../components/ErrorPage";
 import {Loader} from "../components/UI/Loader";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const Ability = () => {
 
@@ -34,12 +35,25 @@ export const Ability = () => {
         return (
             <div className= {`desc-container border border-${founded.color}`}>
                 <h1 className={`text-${founded.color}`}>{ability.activeAbility.name.replace("-", ' ').toUpperCase()}</h1>
-                <p>{ability.activeAbility.effect_entries[0].effect}</p>
+                {
+                    ability.activeAbility.effect_entries[0]
+                    ?<p>{ability.activeAbility.effect_entries[0].effect}</p>
+                        : <p>No description added</p>
+                }
+
             </div>
         )
     };
 
     const renderPoks = () => {
+        if(ability.poksWithAbilities.length === 0){
+            return (
+                <div className='empty-container'>
+                    <h3>No pokemons found</h3>
+                    <FontAwesomeIcon icon={'sad-cry'} />
+                </div>
+            )
+        }
         return ability.poksWithAbilities.map((pok, index) => {
             return (
                 <Link key={index} to={`/pokemon/${pok.id}`}>

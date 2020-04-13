@@ -25,12 +25,14 @@ export const fetchAbilities = () => {
 
         await axios.get(baseUrl)
             .then(response => {
+
                 const maxCount = response.data.count;
+                console.log(maxCount);
                 return axios.get(baseUrl + '?limit=' + maxCount)
                     .then(response => {
                         const abilities = response.data.results;
                         for (let i = 0; i < abilities.length; i++){
-                            abilities[i].id = i+1;
+                            abilities[i].id = Number(abilities[i].url.match((/\/+[0-9]+\//g))[0].replace(/\//g, ''));
                             abilities[i].img = skillsIconsSrc[i];
                             abilities[i].color = colors[Math.floor(Math.random() * 5)];
                         }
