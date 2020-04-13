@@ -113,6 +113,11 @@
 }
 // mobile screens
 @include media-breakpoint-down(xs) {
+  .navbar-brand{
+    img{
+      width: 80px;
+    }
+  }
     img.photo{
       width: 30ch;
       height: 30ch;

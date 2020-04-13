@@ -78,6 +78,7 @@ export const AbilitiesList = () => {
                     title="Find ability"
                     finder={finder}
                     setFinder={setFinder}
+                    setPage = {setCurrentPage}
                 />
             </div>
             {
@@ -90,6 +91,7 @@ export const AbilitiesList = () => {
                                 ?  <PaginationCustom
                                     fullList = {finder ? filtered : ability.listing}
                                     itemsPerPage = {itemsPerPage}
+                                    currentPage={currentPage}
                                     setGlobalPages = {setCurrentPage}
                                     container={_listingContainer.current}
                                 />

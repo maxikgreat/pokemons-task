@@ -66,7 +66,7 @@ export const Ability = () => {
                 ? <Loader /> :
                     <>
                         <div className='row border-bottom border-success mb-3 p-3'>
-                            <div className='col-md-5 col-12 d-flex align-items-center'>
+                            <div className='col-md-5 col-12 d-flex align-items-center justify-content-center'>
                                 {findImage()}
                             </div>
                             <div className='col-md-7 col-12 d-flex align-items-center'>

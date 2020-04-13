@@ -61,7 +61,7 @@ export const Pokemon = () => {
                        </div>
                    </div>
                    <div className='row d-flex align-items-center'>
-                       <div className='col-md-5 col-12 mb-sm-0 mb-5'>
+                       <div className='col-md-5 col-12 mb-md-0 mb-5'>
                            <AbilitiesInPok
                                skills = {formSkills(pokemon.abilities, abilities.listing)}
                            />

@@ -112,7 +112,6 @@ export const Listing = () => {
 
             </Jumbotron>
             <div className='options-container'>
-                {console.log(currentPage)}
                 <Finder
                     title = "Find pokemon"
                     finder = {finder}
