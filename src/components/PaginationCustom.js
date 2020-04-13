@@ -1,15 +1,10 @@
 
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const PaginationCustom = ({fullList, itemsPerPage, setGlobalPages, container}) => {
-
-
-    useEffect(() => {
-        //TODO FIX PAGES
-    }, []);
+export const PaginationCustom = ({fullList, itemsPerPage, currentPage, setGlobalPages, container}) => {
 
     const back = <FontAwesomeIcon icon={'backward'}/>;
     const forward = <FontAwesomeIcon icon={'forward'} />;
@@ -35,7 +30,7 @@ export const PaginationCustom = ({fullList, itemsPerPage, setGlobalPages, contai
                 breakLabel={'...'}
                 containerClassName={'pagination'}
                 activeClassName={'active'}
-                initialPage = {0}
+                forcePage = {currentPage - 1}
                 pageCount={pageNumber}
                 onPageChange={page => updatePages(page.selected)}
             />

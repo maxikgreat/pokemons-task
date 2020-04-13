@@ -112,15 +112,17 @@ export const Listing = () => {
 
             </Jumbotron>
             <div className='options-container'>
+                {console.log(currentPage)}
                 <Finder
                     title = "Find pokemon"
                     finder = {finder}
                     setFinder = {setFinder}
+                    setPage = {setCurrentPage}
                 />
                 <ListLoader
                     maxCount = {listing.maxCount}
-                    showAlert ={showAlert}
-                    hideAlert={hideAlert}
+                    showAlert = {showAlert}
+                    hideAlert= {hideAlert}
                     fetchList = {fetchList}
                     dispatch = {dispatch}
                 />
@@ -137,6 +139,7 @@ export const Listing = () => {
                         ? <PaginationCustom
                                 fullList = {finder !== '' ? filtered : listing.listing}
                                 itemsPerPage = {itemsPerPage}
+                                currentPage = {currentPage}
                                 setGlobalPages = {setCurrentPage}
                                 container = {_listingContainer.current}
                             />

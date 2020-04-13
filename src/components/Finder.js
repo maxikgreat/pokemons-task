@@ -1,7 +1,11 @@
 import React from 'react'
 
-export const Finder = ({title, finder, setFinder}) => {
+export const Finder = ({title, finder, setFinder, setPage}) => {
 
+    const changeHandle = (e) => {
+        setPage(1);
+        setFinder(e.target.value)
+    };
 
   return(
       <div className="input-group mb-3">
@@ -15,7 +19,7 @@ export const Finder = ({title, finder, setFinder}) => {
               aria-describedby="finder"
               placeholder="Start typing..."
               value={finder}
-              onChange = {e => setFinder(e.target.value)}
+              onChange = {e => changeHandle(e)}
           />
       </div>
   )
